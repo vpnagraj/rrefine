@@ -3,9 +3,12 @@
 #' @param file file name to be uploaded
 #' @param project_name name of the project to be created upon upload
 #' @param open.browser boolean for whether or not you want to open browser
-#' @return
 #' @export
-#'
+#' @examples
+#' \dontrun{
+#' write.csv(x = mtcars, file = "mtcars.csv")
+#' refine_upload(file = "mtcars.csv", project_name = "mtcars clean-up")
+#' }
 #'
 
 refine_upload <- function(file, project_name, open.browser = FALSE) {

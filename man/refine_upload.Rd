@@ -4,14 +4,23 @@
 \alias{refine_upload}
 \title{helper function to configure and call path to open refine}
 \usage{
-refine_upload(file, open.browser = FALSE)
+refine_upload(file, project_name, open.browser = FALSE)
 }
 \arguments{
 \item{file}{file name to be uploaded}
+
+\item{project_name}{name of the project to be created upon upload}
 
 \item{open.browser}{boolean for whether or not you want to open browser}
 }
 \description{
 helper function to configure and call path to open refine
+}
+\examples{
+\dontrun{
+write.csv(x = mtcars, file = "mtcars.csv")
+refine_upload(file = "mtcars.csv", project_name = "mtcars clean-up")
+}
+
 }
 
