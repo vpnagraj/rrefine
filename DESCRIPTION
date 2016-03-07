@@ -3,9 +3,11 @@ Type: Package
 Title: r client for open refine api
 Version: 0.1
 Date: 2016-02-17
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author@R: person("Nagraj", "VP", , "vpnagraj@virginia.edu", c("aut", "cre"))
+Maintainer: VP Nagraj <vpnagraj@virginia.edu>
+Description: r client to access open refine
+License: GNU
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Imports:
+    httr
