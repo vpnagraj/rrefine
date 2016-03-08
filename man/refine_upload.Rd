@@ -4,12 +4,12 @@
 \alias{refine_upload}
 \title{helper function to configure and call path to open refine}
 \usage{
-refine_upload(file, project_name, open.browser = FALSE)
+refine_upload(file, project_name = NULL, open.browser = FALSE)
 }
 \arguments{
 \item{file}{file name to be uploaded}
 
-\item{project_name}{name of the project to be created upon upload}
+\item{project_name}{name of the project to be created upon upload, default is NULL and will project will be named 'Untitled' in open refine}
 
 \item{open.browser}{boolean for whether or not you want to open browser}
 }

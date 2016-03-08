@@ -1,7 +1,7 @@
 #' helper function to configure and call path to open refine
 #'
 #' @param file file name to be uploaded
-#' @param project_name name of the project to be created upon upload
+#' @param project_name name of the project to be created upon upload, default is NULL and will project will be named 'Untitled' in open refine
 #' @param open.browser boolean for whether or not you want to open browser
 #' @export
 #' @examples
@@ -11,7 +11,7 @@
 #' }
 #'
 
-refine_upload <- function(file, project_name, open.browser = FALSE) {
+refine_upload <- function(file, project_name = NULL , open.browser = FALSE) {
 
     # define upload query based on configurations in refine_path()
     refpath <- paste0(refine_path(), "/command/core/create-project-from-upload")
