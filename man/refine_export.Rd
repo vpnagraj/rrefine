@@ -4,10 +4,12 @@
 \alias{refine_export}
 \title{export data from open refine}
 \usage{
-refine_export(project.id, format = "csv", col.names = TRUE,
-  encoding = "UTF-8")
+refine_export(project.name = NULL, project.id = NULL, format = "csv",
+  col.names = TRUE, encoding = "UTF-8")
 }
 \arguments{
+\item{project.name}{name of project to be exported}
+
 \item{project.id}{unique identifier for open refine project to be exported}
 
 \item{format}{file format of open refine project to be exported, default is 'csv'}

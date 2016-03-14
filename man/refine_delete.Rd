@@ -4,9 +4,11 @@
 \alias{refine_delete}
 \title{delete project from open refine}
 \usage{
-refine_delete(project.id)
+refine_delete(project.name = NULL, project.id = NULL)
 }
 \arguments{
+\item{project.name}{name of project to be deleted}
+
 \item{project.id}{unique identifier for open refine project to be deleted}
 }
 \description{
@@ -14,6 +16,7 @@ delete project from open refine
 }
 \examples{
 \dontrun{
+refine_delete(project.name = "foo")
 refine_delete(project.id = 1901017388690)
 }
 

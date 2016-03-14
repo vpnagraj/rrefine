@@ -3,9 +3,9 @@ Type: Package
 Title: r client for open refine api
 Version: 0.1
 Date: 2016-02-17
-Author@R: person("Nagraj", "VP", , "vpnagraj@virginia.edu", c("aut", "cre"))
+Author: person("Nagraj", "VP", , "vpnagraj@virginia.edu", c("aut", "cre"))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
-Description: R client to use OpenRefine (formerly Google Refine) API
+Description: This is an R client to use OpenRefine (formerly Google Refine) API.
 License: GNU
 LazyData: TRUE
 RoxygenNote: 5.0.1
