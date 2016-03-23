@@ -12,5 +12,4 @@ RoxygenNote: 5.0.1
 Imports:
     httr (>= 0.5),
     readr (>= 0.2.2),
-    curl,
     rlist
