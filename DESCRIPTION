@@ -5,10 +5,12 @@ Version: 0.1
 Date: 2016-02-17
 Author: person("Nagraj", "VP", , "vpnagraj@virginia.edu", c("aut", "cre"))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
-Description: This is an R client to use OpenRefine (formerly Google Refine) API.
+Description: This is an R client to use the OpenRefine (formerly Google Refine) API.
 License: GNU
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     httr (>= 0.5),
-    readr (>= 0.2.2)
+    readr (>= 0.2.2),
+    curl,
+    rlist

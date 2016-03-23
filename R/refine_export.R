@@ -51,5 +51,3 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
         type = "text/csv", as = "parsed", col_names = col.names, col_types = NULL, encoding = encoding)
 
 }
-
-
