@@ -10,6 +10,6 @@ License: GNU
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
-    httr (>= 0.5),
+    httr (>= 1.1.0),
     readr (>= 0.2.2),
     rlist
