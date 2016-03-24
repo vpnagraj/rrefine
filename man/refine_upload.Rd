@@ -19,7 +19,7 @@ helper function to configure and call path to open refine
 \examples{
 \dontrun{
 write.csv(x = mtcars, file = "mtcars.csv")
-refine_upload(file = "mtcars.csv", project_name = "mtcars clean-up")
+refine_upload(file = "mtcars.csv", project_name = "mtcars_clean_up")
 }
 
 }
