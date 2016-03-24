@@ -5,6 +5,7 @@
 #' @param format file format of open refine project to be exported, default is 'csv'
 #' @param col.names boolean indicator for whether column names should be included.
 #' @param encoding character encoding for exported data, default is 'UTF-8'
+#'
 #' @export
 #' @examples
 #' \dontrun{

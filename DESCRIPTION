@@ -3,7 +3,7 @@ Type: Package
 Title: r client for open refine api
 Version: 0.1
 Date: 2016-02-17
-Author: person("Nagraj", "VP", "vpnagraj@virginia.edu", c("aut", "cre"))
+Authors@R: c(person("VP", "NAGRAJ", role = c("aut", "cre"), email = "vpnagraj@virginia.edu"))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
 Description: This is an R client to use the OpenRefine (formerly Google Refine) API.
 License: GPL-3
