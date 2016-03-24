@@ -25,6 +25,8 @@ refine_delete <- function(project.name = NULL, project.id = NULL) {
 
         resp <- refine_metadata()
 
+        name <- NULL
+
         id <- names(rlist::list.mapv(
             rlist::list.filter(resp[["projects"]],
                                name == project.name),
