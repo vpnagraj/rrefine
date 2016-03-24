@@ -28,7 +28,10 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
 
         resp <- refine_metadata()
 
-        id <- names(rlist::list.mapv(rlist::list.filter(resp[['projects']], name == project.name), name))
+        id <- names(rlist::list.mapv(
+            rlist::list.filter(resp[["projects"]],
+                               name == project.name),
+                                     name))
 
         if (length(id) == 1) {
 
@@ -36,18 +39,31 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
 
         } else if (length(id) == 0) {
 
-            stop(paste0("there are no projects found named '", project.name, "' ... try adjusting the project.name argument or use project.id"))
+            stop(paste0("there are no projects found named '",
+                        project.name,
+                        "' ... try adjusting the project.name argument or use project.id"))
 
         } else {
 
-            stop(paste0("there are mulitple projects named '", project.name, "' ... try addding a project.id"))
+            stop(paste0("there are mulitple projects named '",
+                        project.name,
+                        "' ... try addding a project.id"))
 
         }
     }
 
     httr::content(
         httr::POST(
-            paste0(refine_path(), "/command/core/export-rows/", project.id, ".", format), body = c(engine = list(facets = "", mode="row-based"), project = project.id, format = format), encode = 'form'),
-        type = "text/csv", as = "parsed", col_names = col.names, col_types = NULL, encoding = encoding)
+            paste0(refine_path(), "/",
+                   "command/core/export-rows/",
+                   project.id, ".", format),
+            body = c(engine = list(facets = "", mode="row-based"),
+                     project = project.id, format = format),
+            encode = "form"),
+        type = "text/csv",
+        as = "parsed",
+        col_names = col.names,
+        col_types = NULL,
+        encoding = encoding)
 
 }
