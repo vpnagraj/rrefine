@@ -2,24 +2,24 @@
 % Please edit documentation in R/refine_upload.R
 \name{refine_upload}
 \alias{refine_upload}
-\title{helper function to configure and call path to open refine}
+\title{Upload a csv file to OpenRefine}
 \usage{
-refine_upload(file, project_name = NULL, open.browser = FALSE)
+refine_upload(file, project.name = NULL, open.browser = FALSE)
 }
 \arguments{
-\item{file}{file name to be uploaded}
+\item{file}{Name of csv file to be uploaded}
 
-\item{project_name}{name of the project to be created upon upload, default is NULL and will project will be named 'Untitled' in open refine}
+\item{project.name}{optional parameter to specify name of the project to be created upon upload, default is NULL and project will be named 'Untitled' in OpenRefine}
 
-\item{open.browser}{boolean for whether or not you want to open browser}
+\item{open.browser}{boolean for whether or not the browser should open on successful upload}
 }
 \description{
-helper function to configure and call path to open refine
+Upload a csv file to OpenRefine
 }
 \examples{
 \dontrun{
 write.csv(x = mtcars, file = "mtcars.csv")
-refine_upload(file = "mtcars.csv", project_name = "mtcars_clean_up")
+refine_upload(file = "mtcars.csv", project.name = "mtcars_clean_up")
 }
 
 }
