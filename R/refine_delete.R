@@ -1,4 +1,4 @@
-#' delete project from open refine
+#' delete project from OpenRefine
 #'
 #' @param project.name name of project to be deleted
 #' @param project.id unique identifier for open refine project to be deleted
@@ -7,6 +7,7 @@
 #' \dontrun{
 #' refine_delete(project.name = "foo")
 #' refine_delete(project.id = 1901017388690)
+#' refine_delete(project.name = "Untitled", project.id = 1901018888332)
 #' }
 #'
 refine_delete <- function(project.name = NULL, project.id = NULL) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{refine_path}
 \alias{refine_path}
-\title{helper function to configure and call path to open refine}
+\title{helper function to configure and call path to OpenRefine}
 \usage{
 refine_path(host = "127.0.0.1", port = "3333")
 }
@@ -15,6 +15,6 @@ refine_path(host = "127.0.0.1", port = "3333")
 path to be executed
 }
 \description{
-helper function to configure and call path to open refine
+helper function to configure and call path to OpenRefine
 }
 

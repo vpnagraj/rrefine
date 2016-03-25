@@ -2,7 +2,7 @@
 % Please edit documentation in R/refine_delete.R
 \name{refine_delete}
 \alias{refine_delete}
-\title{delete project from open refine}
+\title{delete project from OpenRefine}
 \usage{
 refine_delete(project.name = NULL, project.id = NULL)
 }
@@ -12,12 +12,13 @@ refine_delete(project.name = NULL, project.id = NULL)
 \item{project.id}{unique identifier for open refine project to be deleted}
 }
 \description{
-delete project from open refine
+delete project from OpenRefine
 }
 \examples{
 \dontrun{
 refine_delete(project.name = "foo")
 refine_delete(project.id = 1901017388690)
+refine_delete(project.name = "Untitled", project.id = 1901018888332)
 }
 
 }

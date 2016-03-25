@@ -1,8 +1,8 @@
-#' Upload a csv file to OpenRefine
+#' upload a csv file to OpenRefine
 #'
 #' @param file Name of csv file to be uploaded
 #' @param project.name optional parameter to specify name of the project to be created upon upload, default is NULL and project will be named 'Untitled' in OpenRefine
-#' @param open.browser boolean for whether or not the browser should open on successful upload
+#' @param open.browser logical for whether or not the browser should open on successful upload
 #' @export
 #' @examples
 #' \dontrun{

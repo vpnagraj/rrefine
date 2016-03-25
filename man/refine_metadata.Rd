@@ -2,12 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{refine_metadata}
 \alias{refine_metadata}
-\title{get all project metadata}
+\title{get all project metadata from OpenRefine}
 \usage{
 refine_metadata()
 }
 \description{
-get all project metadata
+get all project metadata from OpenRefine
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/refine_export.R
 \name{refine_export}
 \alias{refine_export}
-\title{export data from open refine}
+\title{export data from OpenRefine}
 \usage{
 refine_export(project.name = NULL, project.id = NULL, format = "csv",
   col.names = TRUE, encoding = "UTF-8")
@@ -10,20 +10,22 @@ refine_export(project.name = NULL, project.id = NULL, format = "csv",
 \arguments{
 \item{project.name}{name of project to be exported}
 
-\item{project.id}{unique identifier for open refine project to be exported}
+\item{project.id}{unique identifier for project to be exported}
 
-\item{format}{file format of open refine project to be exported, default is 'csv'}
+\item{format}{file format of project to be exported, default is 'csv'}
 
-\item{col.names}{boolean indicator for whether column names should be included.}
+\item{col.names}{logical indicator for whether column names should be included.}
 
 \item{encoding}{character encoding for exported data, default is 'UTF-8'}
 }
 \description{
-export data from open refine
+export data from OpenRefine
 }
 \examples{
 \dontrun{
+refine_export("purple_rain")
 refine_export(project.id = 1901017388690, format = "csv")
+refine_export(project.name = "Untitled", project.id = 1901017388888)
 }
 
 }

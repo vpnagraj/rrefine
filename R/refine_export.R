@@ -1,15 +1,17 @@
-#' export data from open refine
+#' export data from OpenRefine
 #'
 #' @param project.name name of project to be exported
-#' @param project.id unique identifier for open refine project to be exported
-#' @param format file format of open refine project to be exported, default is 'csv'
-#' @param col.names boolean indicator for whether column names should be included.
+#' @param project.id unique identifier for project to be exported
+#' @param format file format of project to be exported, default is 'csv'
+#' @param col.names logical indicator for whether column names should be included.
 #' @param encoding character encoding for exported data, default is 'UTF-8'
 #'
 #' @export
 #' @examples
 #' \dontrun{
+#' refine_export("purple_rain")
 #' refine_export(project.id = 1901017388690, format = "csv")
+#' refine_export(project.name = "Untitled", project.id = 1901017388888)
 #' }
 #'
 

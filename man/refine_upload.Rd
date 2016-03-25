@@ -2,7 +2,7 @@
 % Please edit documentation in R/refine_upload.R
 \name{refine_upload}
 \alias{refine_upload}
-\title{Upload a csv file to OpenRefine}
+\title{upload a csv file to OpenRefine}
 \usage{
 refine_upload(file, project.name = NULL, open.browser = FALSE)
 }
@@ -11,10 +11,10 @@ refine_upload(file, project.name = NULL, open.browser = FALSE)
 
 \item{project.name}{optional parameter to specify name of the project to be created upon upload, default is NULL and project will be named 'Untitled' in OpenRefine}
 
-\item{open.browser}{boolean for whether or not the browser should open on successful upload}
+\item{open.browser}{logical for whether or not the browser should open on successful upload}
 }
 \description{
-Upload a csv file to OpenRefine
+upload a csv file to OpenRefine
 }
 \examples{
 \dontrun{

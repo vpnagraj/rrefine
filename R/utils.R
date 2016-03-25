@@ -1,7 +1,7 @@
-#' helper function to configure and call path to open refine
+#' helper function to configure and call path to OpenRefine
 #'
-#' @param host host path for your open refine application
-#' @param port port number for your open refine application
+#' @param host host path for your OpenRefine application
+#' @param port port number for your OpenRefine application
 #' @return path to be executed
 
 refine_path <- function(host = "127.0.0.1", port ="3333") {
@@ -10,7 +10,7 @@ refine_path <- function(host = "127.0.0.1", port ="3333") {
 
 }
 
-#' get all project metadata
+#' get all project metadata from OpenRefine
 #'
 #' @examples
 #' \dontrun{
