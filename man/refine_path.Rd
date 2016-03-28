@@ -7,9 +7,9 @@
 refine_path(host = "127.0.0.1", port = "3333")
 }
 \arguments{
-\item{host}{host path for your open refine application}
+\item{host}{host path for your OpenRefine application}
 
-\item{port}{port number for your open refine application}
+\item{port}{port number for your OpenRefine application}
 }
 \value{
 path to be executed

@@ -6,6 +6,7 @@ Date: 2016-03-26
 Authors@R: c(person("VP", "Nagraj", role = c("aut", "cre"), email = "vpnagraj@virginia.edu"))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
 Description: 'OpenRefine' (formerly 'Google Refine') is a popular, open source data cleaning software. This package enables users to programmatically trigger data transfer between R and 'OpenRefine'. Available functionality includes project import, export and deletion.
+License: GPL-3
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:

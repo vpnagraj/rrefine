@@ -14,7 +14,7 @@ refine_export(project.name = NULL, project.id = NULL, format = "csv",
 
 \item{format}{file format of project to be exported, default is 'csv'}
 
-\item{col.names}{logical indicator for whether column names should be included.}
+\item{col.names}{logical indicator for whether column names should be included}
 
 \item{encoding}{character encoding for exported data, default is 'UTF-8'}
 }
