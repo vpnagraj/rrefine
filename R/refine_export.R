@@ -3,7 +3,7 @@
 #' @param project.name name of project to be exported
 #' @param project.id unique identifier for project to be exported
 #' @param format file format of project to be exported, default is 'csv'
-#' @param col.names logical indicator for whether column names should be included.
+#' @param col.names logical indicator for whether column names should be included
 #' @param encoding character encoding for exported data, default is 'UTF-8'
 #'
 #' @export
