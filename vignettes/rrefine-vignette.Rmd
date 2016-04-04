@@ -1,0 +1,76 @@
+---
+title: "rrefine"
+author: "VP Nagraj"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rrefine}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(rrefine)
+```
+
+## Introduction
+
+*OpenRefine* (formerly *Google Refine*) is a popular, open source data cleaning software[^1]. **rrefine** enables users to programmatically trigger data transfer between R and *OpenRefine*. Using the functions avaialable in this package, you can import, export or delete a project in *OpenRefine* directly from an R script. There are several client libraries for automating *OpenRefine* tasks via Python, nodeJS and Ruby[^2]. **rrefine** extends this functionality to R users.
+
+## Installation
+
+The latest version of **rrefine** is availabe on [Github](https://github.com/vpnagraj/rrefine) and can be installed via **devtools** by using the following:
+
+```{r, echo=TRUE, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("vpnagraj/rrefine")
+library(rrefine)
+```
+
+## `lateformeeting`
+
+**rrefine** includes a sample "dirty" data set to illustrate its features. This object (`lateformeeting`) is a simulated data frame that holds `r nrow(lateformeeting)` observations of dates, days of the week, numbers of hours slept and indicators of whether or not the subject was on time for work. The data are recorded in inconsistent formats and will require cleaning in order to be parsed correctly by R. You can take a look at how messy things are below:
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(lateformeeting)
+```
+
+## `refine_upload()`
+
+While all of the data cleaning here could be performed using R, this is a typical scenario for *OpenRefine* users. The first step to creating a new project is to make sure *OpenRefine* is installed and running locally at `http://127.0.0.1:3333/`[^3]. The `refine_upload()` function allows you to pass the contents of a comma separted value (csv) along with a project name (optional) and an argument to automatically open the browser in which *OpenRefine* is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
+write.csv(lateformeeting, file = "lateformeeting.csv")
+refine_upload(file = "lateformeeting.csv", project.name = "lfm_cleanup", open.browser = TRUE)
+```
+
+With the project uploaded, you can perform any of the desired clean-up procedures in *OpenRefine*.
+
+## `refine_export()`
+
+Once you've cleaned up the data in *OpenRefine* you can pull it back into R for plotting, modeling, etc. by using `refine_export()`. This function will accept *either* the project name or the numerical unique identifier. It is only necessary to use *both* if there are multiple projects with the same name in your *OpenRefine* application. Note that here, the data is exported directly into R as a data frame, and you can assign it to a new object.
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
+lfm_clean <- refine_export(project.name = "lfm_cleanup")
+lfm_clean
+```
+
+```{r, echo = FALSE, eval = TRUE, warning = FALSE, message=FALSE}
+# knitr::kable(lateformeeting)
+```
+
+From there the clean data is available for analyses that couldn't have been performed in its original format.
+
+## `refine_delete()`
+
+To clean up your *OpenRefine* workspace you can delete projects using `refine_delete()`. Just like `refine_export()` it's possible to pass *either* a project name or unique identifier to this function. And it is only necessary to use *both* if there are multiple projects with the same name.
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
+refine_delete(project.name = "lfm_cleanup")
+```
+
+## References
+
+[^1]: <http://openrefine.org/>
+[^2]: <https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Developers#known-client-libraries-for-refine>
+[^3]: <http://openrefine.org/download.html>
