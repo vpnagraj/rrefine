@@ -40,7 +40,7 @@ knitr::kable(lateformeeting)
 While all of the data cleaning here could be performed using R, this is a typical scenario for *OpenRefine* users. The first step to creating a new project is to make sure *OpenRefine* is installed and running locally at `http://127.0.0.1:3333/`[^3]. The `refine_upload()` function allows you to pass the contents of a comma separted value (csv) along with a project name (optional) and an argument to automatically open the browser in which *OpenRefine* is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
-write.csv(lateformeeting, file = "lateformeeting.csv")
+write.csv(lateformeeting, file = "lateformeeting.csv", row.names = FALSE)
 refine_upload(file = "lateformeeting.csv", project.name = "lfm_cleanup", open.browser = TRUE)
 ```
 
@@ -56,7 +56,7 @@ lfm_clean
 ```
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message=FALSE}
-# knitr::kable(lateformeeting)
+# knitr::kable(lfm_clean)
 ```
 
 From there the clean data is available for analyses that couldn't have been performed in its original format.
