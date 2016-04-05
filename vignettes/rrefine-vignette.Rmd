@@ -56,7 +56,7 @@ lfm_clean
 ```
 
 ```{r, echo = FALSE, eval = TRUE, warning = FALSE, message=FALSE}
-# knitr::kable(lfm_clean)
+knitr::kable(lfm_clean)
 ```
 
 From there the clean data is available for analyses that couldn't have been performed in its original format.
