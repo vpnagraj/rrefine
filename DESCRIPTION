@@ -11,7 +11,8 @@ LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports:
     httr (>= 1.1.0),
-    rlist
+    rlist,
+    readr
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
