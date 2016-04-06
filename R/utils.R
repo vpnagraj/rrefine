@@ -75,3 +75,17 @@ refine_id <- function(project.name, project.id) {
         }
     }
 }
+
+#' helper function to check if rrefine can connect to OpenRefine
+#'
+#' @return error message if rrefine is unable to connect to OpenRefine, otherwise is invisible
+
+refine_check <- function() {
+
+    tryCatch(
+        expr = httr::GET(refine_path()),
+        error = function(e)
+            cat("rrefine is unable to connect to OpenRefine ... make sure OpenRefine is running"))
+
+    invisible()
+}

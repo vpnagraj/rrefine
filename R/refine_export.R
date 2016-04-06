@@ -17,6 +17,8 @@
 
 refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8") {
 
+    refine_check()
+
     project.id <- refine_id(project.name, project.id)
 
     httr::content(

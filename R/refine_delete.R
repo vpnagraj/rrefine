@@ -12,6 +12,8 @@
 #'
 refine_delete <- function(project.name = NULL, project.id = NULL) {
 
+    refine_check()
+
     project.id <- refine_id(project.name, project.id)
 
     x <- readline(prompt = "are you sure you want to delete this project? (Y/N): ")

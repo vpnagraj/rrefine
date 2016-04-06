@@ -13,6 +13,8 @@
 
 refine_upload <- function(file, project.name = NULL , open.browser = FALSE) {
 
+    refine_check()
+
     # define upload query based on configurations in refine_path()
     refpath <- paste0(refine_path(), "/", "command/core/create-project-from-upload")
 
