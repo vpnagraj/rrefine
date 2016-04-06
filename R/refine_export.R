@@ -5,7 +5,6 @@
 #' @param format file format of project to be exported, default is 'csv'
 #' @param col.names logical indicator for whether column names should be included
 #' @param encoding character encoding for exported data, default is 'UTF-8'
-#'@importFrom readr read_csv
 #' @export
 #' @examples
 #' \dontrun{
@@ -21,7 +20,7 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
 
     project.id <- refine_id(project.name, project.id)
 
-    httr::content(
+    cont <- httr::content(
         httr::POST(
             paste0(refine_path(), "/",
                    "command/core/export-rows/",
@@ -30,9 +29,9 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
                      project = project.id, format = format),
             encode = "form"),
         type = "text/csv",
-        as = "parsed",
-        col_names = col.names,
-        col_types = NULL,
+        as = "text",
         encoding = encoding)
+
+    readr::read_csv(cont, col_names = col.names, col_types = NULL)
 
 }
