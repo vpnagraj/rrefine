@@ -14,7 +14,7 @@ devtools::install_github("vpnagraj/rrefine")
 library(rrefine)
 ```
 
-**rrefine** is also available on CRAN:
+**rrefine** is also available on [CRAN](https://cran.r-project.org/web/packages/rrefine/index.html):
 
 ```
 install.packages("rrefine")
