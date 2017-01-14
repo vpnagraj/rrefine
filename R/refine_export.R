@@ -20,17 +20,24 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
 
     project.id <- refine_id(project.name, project.id)
 
-    cont <- httr::content(
-        httr::POST(
-            paste0(refine_path(), "/",
-                   "command/core/export-rows/",
-                   project.id, ".", format),
-            body = c(engine = list(facets = "", mode="row-based"),
-                     project = project.id, format = format),
-            encode = "form"),
-        type = "text/csv",
-        as = "text",
-        encoding = encoding)
+    res <- httr::POST(
+        paste0(refine_path(), "/",
+               "command/core/export-rows/",
+               project.id, ".", format),
+        body = c(engine = list(facets = "", mode="row-based"),
+                 project = project.id, format = format),
+        encode = "form")
+
+    res_status <- httr::status_code(res)
+
+    if (res_status != 200)
+        stop(paste0("OpenRefine failed to find project id #", project.id))
+
+    cont <- httr::content(res,
+                          type = "text/csv",
+                          as = "text",
+                          encoding = encoding)
+
 
     readr::read_csv(cont, col_names = col.names, col_types = NULL)
 
