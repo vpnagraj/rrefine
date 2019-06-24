@@ -89,3 +89,17 @@ refine_check <- function() {
 
     invisible()
 }
+
+#' Helper function to retrieve CSFR token
+#'
+#' @return Character vector with OpenRefine CSFR token
+#'
+refine_token <- function() {
+
+    ## before proceeding check that OpenRefine is running
+    refine_check()
+    ## get token request response
+    token <- httr::GET(paste0(refine_path(), "/", "command/core/get-csrf-token"))
+    ## parse response for token
+    httr::content(token)$token
+}

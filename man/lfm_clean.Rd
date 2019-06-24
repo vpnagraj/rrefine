@@ -21,4 +21,3 @@ This data is a simulated collection of dates, days of the week, numbers of hours
 head(lfm_clean)
 }
 \keyword{datasets}
-

@@ -20,7 +20,11 @@ refine_delete <- function(project.name = NULL, project.id = NULL) {
 
     if(x == "Y") {
         httr::POST(
-            paste0(refine_path(), "/", "command/core/delete-project"),
+            paste0(refine_path(),
+                   "/",
+                   "command/core/delete-project",
+                   "?csrf_token=",
+                   refine_token()),
             body = list(project = project.id),
             encode = "form")
         message("project deleted")
