@@ -55,13 +55,9 @@ refine_id <- function(project.name, project.id) {
         if (length(id) == 1) {
             project.id <- id
         } else if (length(id) == 0) {
-            stop(paste0("there are no projects found named '",
-            project.name,
-            "' ... try adjusting the project.name argument or use project.id"))
+            stop(sprintf("There are no projects found named '%s' ... try adjusting the project.name argument or use project.id", project.name))
         } else {
-            stop(paste0("there are mulitple projects named '",
-                project.name,
-                "' ... try addding a project.id"))
+            stop(paste0("There are multiple projects named '%s' ... try adding a project.id", project.name))
         }
     }
 }

@@ -15,7 +15,7 @@ refine_delete <- function(project.name = NULL, project.id = NULL) {
     refine_check()
 
     project.id <- refine_id(project.name, project.id)
-    x <- readline(prompt = "are you sure you want to delete this project? (Y/N): ")
+    x <- readline(prompt = "Are you sure you want to delete this project? (Y/N): ")
 
     if(x == "Y") {
         httr::POST(
@@ -26,8 +26,8 @@ refine_delete <- function(project.name = NULL, project.id = NULL) {
                    refine_token()),
             body = list(project = project.id),
             encode = "form")
-        message("project deleted")
+        message(sprintf("Project %s deleted", project.id))
     } else
-        stop("aborting delete process")
+        stop("Aborting delete process")
 
 }

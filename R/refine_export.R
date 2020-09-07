@@ -31,7 +31,7 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
     res_status <- httr::status_code(res)
 
     if (res_status != 200)
-        stop(paste0("OpenRefine failed to find project id #", project.id))
+        stop(sprintf("OpenRefine failed to find project id '%s'", project.id))
 
     cont <- httr::content(res,
                           type = "text/csv",
