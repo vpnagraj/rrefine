@@ -38,7 +38,6 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
                           as = "text",
                           encoding = encoding)
 
-
     readr::read_csv(cont, col_names = col.names, col_types = NULL)
 
 }
