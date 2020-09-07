@@ -21,4 +21,3 @@ This data is a simulated collection of dates, days of the week, numbers of hours
 head(lateformeeting)
 }
 \keyword{datasets}
-

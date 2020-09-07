@@ -12,4 +12,3 @@ error message if rrefine is unable to connect to OpenRefine, otherwise is invisi
 \description{
 helper function to check if rrefine can connect to OpenRefine
 }
-

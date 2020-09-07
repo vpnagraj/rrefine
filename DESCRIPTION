@@ -8,7 +8,7 @@ Maintainer: VP Nagraj <nagraj@nagraj.net>
 Description: 'OpenRefine' (formerly 'Google Refine') is a popular, open source data cleaning software. This package enables users to programmatically trigger data transfer between R and 'OpenRefine'. Available functionality includes project import, export and deletion.
 License: GPL-3
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 Imports:
     httr (>= 1.1.0),
     rlist,

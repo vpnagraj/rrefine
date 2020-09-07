@@ -17,4 +17,3 @@ unique id of project to be exported or deleted
 \description{
 helper function to get OpenRefine project.id by project.name
 }
-

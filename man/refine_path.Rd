@@ -17,4 +17,3 @@ path to be executed
 \description{
 helper function to configure and call path to OpenRefine
 }
-
