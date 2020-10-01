@@ -15,15 +15,10 @@ refine_upload <- function(file, project.name = NULL , open.browser = FALSE) {
 
     refine_check()
 
-    # define upload query based on configurations in refine_path()
-    refpath <- paste0(refine_path(),
-                      "/",
-                      "command/core/create-project-from-upload",
-                      "?csrf_token=",
-                      refine_token())
-
+    # define upload query
+    query <- refine_query("create-project-from-upload", use_token = TRUE)
     # post project to refine
-    httr::POST(refpath,
+    httr::POST(query,
                body = list(
         "project-file" = httr::upload_file(file),
         "project-name" = project.name)

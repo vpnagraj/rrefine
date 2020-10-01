@@ -20,10 +20,8 @@ refine_path <- function(host = "127.0.0.1", port ="3333") {
 
 refine_metadata <- function() {
 
-    httr::content(httr::GET(paste0(refine_path(),
-        "/",
-        "command/core/get-all-project-metadata"))
-    )
+    query <- refine_query("get-all-project-metadata", use_token = FALSE)
+    httr::content(httr::GET(query))
 
 }
 
@@ -85,8 +83,37 @@ refine_token <- function() {
 
     ## before proceeding check that OpenRefine is running
     refine_check()
+    query <- refine_query("get-csrf-token", use_token = FALSE)
     ## get token request response
-    token <- httr::GET(paste0(refine_path(), "/", "command/core/get-csrf-token"))
+    token <- httr::GET(query)
     ## parse response for token
     httr::content(token)$token
+}
+
+#' Helper function to build OpenRefine API query
+#'
+#' @param query Character vector specifying the API endpoint to query
+#' @param use_token Boolean indicating whether or not the query string should include a CSRF Token (see \code{\link{refine_token}}; default is \code{TRUE}
+#' @return Character vector with query based on parameter entered
+#'
+#'
+refine_query <- function(query, use_token = TRUE) {
+
+    if(use_token) {
+        ## get token request response
+        token <- refine_token()
+
+        query <- paste0(refine_path(),
+                        "/command/core/",
+                        query,
+                        "?csrf_token=",
+                        token)
+    } else {
+        query <- paste0(refine_path(),
+                        "/command/core/",
+                        query)
+    }
+
+    return(query)
+
 }

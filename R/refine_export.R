@@ -16,14 +16,22 @@
 
 refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8") {
 
+    ## check that refine is running
     refine_check()
 
+    ## resolve id for project to export from either project.name or the project.id args
     project.id <- refine_id(project.name, project.id)
 
+    ## export should work without token
+    ## NOTE: need to paste0 to append project.id and format args
+    query <- paste0(refine_query("export-rows", use_token = FALSE),
+                    "/",
+                    project.id,
+                    ".",
+                    format)
+
     res <- httr::POST(
-        paste0(refine_path(), "/",
-               "command/core/export-rows/",
-               project.id, ".", format),
+        query,
         body = c(engine = list(facets = "", mode="row-based"),
                  project = project.id, format = format),
         encode = "form")

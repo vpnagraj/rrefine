@@ -18,12 +18,9 @@ refine_delete <- function(project.name = NULL, project.id = NULL) {
     x <- readline(prompt = "Are you sure you want to delete this project? (Y/N): ")
 
     if(x == "Y") {
+        query <- refine_query("delete-project", use_token = TRUE)
         httr::POST(
-            paste0(refine_path(),
-                   "/",
-                   "command/core/delete-project",
-                   "?csrf_token=",
-                   refine_token()),
+            query,
             body = list(project = project.id),
             encode = "form")
         message(sprintf("Project %s deleted", project.id))
