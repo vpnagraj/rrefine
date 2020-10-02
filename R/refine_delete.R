@@ -27,25 +27,30 @@ refine_delete <- function(project.name = NULL, project.id = NULL, force = FALSE)
 
     query <- refine_query("delete-project", use_token = TRUE)
 
+    ## if the force option is used skip the user prompt and run the delete query
     if(force) {
         httr::POST(
             query,
             body = list(project = project.id),
             encode = "form")
-        message(sprintf("Project %s deleted", project.id))
+      ## otherwise prompt the user to confirm that they want to delete the project
     } else {
         ## prompt user to confirm deletion
         x <- readline(prompt = "Are you sure you want to delete this project? (Y/N): ")
 
         if(x == "Y") {
-            query <- refine_query("delete-project", use_token = TRUE)
             httr::POST(
                 query,
                 body = list(project = project.id),
                 encode = "form")
-            message(sprintf("Project %s deleted", project.id))
         } else
             stop("Aborting delete process")
+    }
+
+    if(!project.id %in% names(refine_metadata()$projects)) {
+        message(sprintf("Project %s deleted", project.id))
+    } else {
+        stop(sprintf("Project %s was not successfully deleted."))
     }
 
 }
