@@ -4,12 +4,14 @@
 \alias{refine_delete}
 \title{Delete project from OpenRefine}
 \usage{
-refine_delete(project.name = NULL, project.id = NULL)
+refine_delete(project.name = NULL, project.id = NULL, force = FALSE)
 }
 \arguments{
 \item{project.name}{Name of project to be deleted}
 
 \item{project.id}{Unique identifier for open refine project to be deleted}
+
+\item{force}{Boolean indicating whether or not the prompt to confirm deletion should be skipped; default is \code{FALSE}}
 }
 \value{
 Operates as a side-effect to delete the project. Issues a message that the project has been deleted.
