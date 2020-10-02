@@ -2,13 +2,13 @@
 % Please edit documentation in R/utils.R
 \name{refine_check}
 \alias{refine_check}
-\title{helper function to check if rrefine can connect to OpenRefine}
+\title{Helper function to check if \code{rrefine} can connect to OpenRefine}
 \usage{
 refine_check()
 }
 \value{
-error message if rrefine is unable to connect to OpenRefine, otherwise is invisible
+Error message if \code{rrefine} is unable to connect to OpenRefine, otherwise is invisible
 }
 \description{
-helper function to check if rrefine can connect to OpenRefine
+Helper function to check if \code{rrefine} can connect to OpenRefine
 }

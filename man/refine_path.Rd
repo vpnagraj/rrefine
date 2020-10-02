@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{refine_path}
 \alias{refine_path}
-\title{helper function to configure and call path to OpenRefine}
+\title{Helper function to configure and call path to OpenRefine}
 \usage{
 refine_path(host = "127.0.0.1", port = "3333")
 }
 \arguments{
-\item{host}{host path for your OpenRefine application}
+\item{host}{Host for running OpenRefine instance; default is `http://127.0.0.1`}
 
-\item{port}{port number for your OpenRefine application}
+\item{port}{Port number for running OpenRefine instance; default is `3333`}
 }
 \value{
-path to be executed
+Path to running
 }
 \description{
-helper function to configure and call path to OpenRefine
+Helper function to configure and call path to OpenRefine
 }

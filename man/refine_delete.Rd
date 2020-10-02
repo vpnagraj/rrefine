@@ -2,17 +2,20 @@
 % Please edit documentation in R/refine_delete.R
 \name{refine_delete}
 \alias{refine_delete}
-\title{delete project from OpenRefine}
+\title{Delete project from OpenRefine}
 \usage{
 refine_delete(project.name = NULL, project.id = NULL)
 }
 \arguments{
-\item{project.name}{name of project to be deleted}
+\item{project.name}{Name of project to be deleted}
 
-\item{project.id}{unique identifier for open refine project to be deleted}
+\item{project.id}{Unique identifier for open refine project to be deleted}
+}
+\value{
+Operates as a side-effect to delete the project. Issues a message that the project has been deleted.
 }
 \description{
-delete project from OpenRefine
+This function allows users to delete a project in OpenRefine by name or unique project identifier. By default users are prompted to confirm deletion. The function wraps the OpenRefine API \code{/command/core/delete-project} query.
 }
 \examples{
 \dontrun{
@@ -21,4 +24,7 @@ refine_delete(project.id = 1901017388690)
 refine_delete(project.name = "Untitled", project.id = 1901018888332)
 }
 
+}
+\references{
+\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#delete-project}
 }

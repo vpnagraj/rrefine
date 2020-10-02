@@ -15,5 +15,5 @@ refine_query(query, use_token = TRUE)
 Character vector with query based on parameter entered
 }
 \description{
-Helper function to build OpenRefine API query
+Starting with the path to the running instance, this function will add a query command and (optionally) a CSFR token with \code{\link{refine_token}}
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{refine_id}
 \alias{refine_id}
-\title{helper function to get OpenRefine project.id by project.name}
+\title{Helper function to get OpenRefine project.id by project.name}
 \usage{
 refine_id(project.name, project.id)
 }
 \arguments{
-\item{project.name}{name of project to be exported or deleted}
+\item{project.name}{Name of project}
 
-\item{project.id}{unique identifier for project to be exported or deleted}
+\item{project.id}{Unique identifier for project}
 }
 \value{
-unique id of project to be exported or deleted
+Unique id of project
 }
 \description{
-helper function to get OpenRefine project.id by project.name
+Helper function to get OpenRefine project.id by project.name
 }

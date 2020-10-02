@@ -2,16 +2,22 @@
 % Please edit documentation in R/utils.R
 \name{refine_metadata}
 \alias{refine_metadata}
-\title{get all project metadata from OpenRefine}
+\title{Get all project metadata from OpenRefine}
 \usage{
 refine_metadata()
 }
+\value{
+Parsed \code{list} object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
+}
 \description{
-get all project metadata from OpenRefine
+This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API \code{/command/core/get-all-project-metadata} endpoint.
 }
 \examples{
 \dontrun{
 refine_metadata()
 }
 
+}
+\references{
+\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
 }

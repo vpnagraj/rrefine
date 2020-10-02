@@ -2,24 +2,27 @@
 % Please edit documentation in R/refine_export.R
 \name{refine_export}
 \alias{refine_export}
-\title{export data from OpenRefine}
+\title{Export data from OpenRefine}
 \usage{
 refine_export(project.name = NULL, project.id = NULL, format = "csv",
   col.names = TRUE, encoding = "UTF-8")
 }
 \arguments{
-\item{project.name}{name of project to be exported}
+\item{project.name}{Name of project to be exported}
 
-\item{project.id}{unique identifier for project to be exported}
+\item{project.id}{Unique identifier for project to be exported}
 
-\item{format}{file format of project to be exported, default is 'csv'}
+\item{format}{File format of project to be exported; note that the only current supported option is 'csv'}
 
-\item{col.names}{logical indicator for whether column names should be included}
+\item{col.names}{Logical indicator for whether column names should be included; default is \code{TRUE}}
 
-\item{encoding}{character encoding for exported data, default is 'UTF-8'}
+\item{encoding}{Character encoding for exported data; default is \code{UTF-8}}
+}
+\value{
+A \code{tibble} that has been parsed and read into memory using \code{\link[readr]{read_csv}}. If \code{col.names=TRUE} then the \code{tibble} will have column headers.
 }
 \description{
-export data from OpenRefine
+This function allows users to pull data from a running OpenRefine instance into R. Users can specify project by name or unique identifier. The function wraps the OpenRefine API query to \code{/command/core/export-rows} and currently only supports export of data in tabular format.
 }
 \examples{
 \dontrun{
@@ -28,4 +31,7 @@ refine_export(project.id = 1901017388690, format = "csv")
 refine_export(project.name = "Untitled", project.id = 1901017388888)
 }
 
+}
+\references{
+\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#export-rows}
 }
