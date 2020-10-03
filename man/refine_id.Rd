@@ -15,5 +15,5 @@ refine_id(project.name, project.id)
 Unique id of project
 }
 \description{
-Helper function to get OpenRefine project.id by project.name
+For functions that allow either a project name or id to be passed, this function is used internally to resolve the project id from name if necessary. It also validates that values passed to the `project.id`` argument match an existing project id in the running OpenRefine instance.
 }

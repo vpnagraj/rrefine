@@ -10,5 +10,5 @@ refine_check()
 Error message if \code{rrefine} is unable to connect to OpenRefine, otherwise is invisible
 }
 \description{
-Helper function to check if \code{rrefine} can connect to OpenRefine
+This function will check that \code{rrefine} is able to access the running OpenRefine instance. Used internally prior to upload, delete, and export operations.
 }

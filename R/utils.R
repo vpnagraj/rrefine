@@ -1,8 +1,11 @@
 #' Helper function to configure and call path to OpenRefine
 #'
+#' This function is a helper that is used throughout `rrefine` to construct the path to the OpenRefine instance. By default this points to the localhost (`http://127.0.0.1:3333`).
+#'
 #' @param host Host for running OpenRefine instance; default is `http://127.0.0.1`
 #' @param port Port number for running OpenRefine instance; default is `3333`
-#' @return Path to running
+#' @return Character vector with path to running OpenRefine instance
+#' @md
 
 refine_path <- function(host = "127.0.0.1", port ="3333") {
 
@@ -31,23 +34,40 @@ refine_metadata <- function() {
 
 #' Helper function to get OpenRefine project.id by project.name
 #'
+#' For functions that allow either a project name or id to be passed, this function is used internally to resolve the project id from name if necessary. It also validates that values passed to the `project.id`` argument match an existing project id in the running OpenRefine instance.
+#'
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @return Unique id of project
+#' @md
 
 refine_id <- function(project.name, project.id) {
 
+    ## check if both arguments are NULL and stop() if so
     if (is.null(project.name) & is.null(project.id)){
         stop("You must supply either a project name or project id")
     }
 
+    ## get metedata for running instance
+    ## this will be used to validate the project id ...
+    ## and find the id by name if project id is passed in
+    metadata <- refine_metadata()
+
     if (!is.null(project.id)) {
-        project.id <- project.id
+
+        ## validate that if a project id is passed in then it actually exists in OpenRefine
+        if(project.id %in% names(metadata$projects)) {
+            project.id <- project.id
+        } else {
+            stop(sprintf("There are no projects that match the id '%s'",
+                         project.id))
+        }
+
+    ## if project id is null then try to get the id from name
     } else {
-        resp <- refine_metadata()
         name <- NULL
         id <- names(rlist::list.mapv(
-        rlist::list.filter(resp[["projects"]],
+        rlist::list.filter(metadata[["projects"]],
             name == project.name),
         name))
 
@@ -64,6 +84,8 @@ refine_id <- function(project.name, project.id) {
 }
 
 #' Helper function to check if `rrefine` can connect to OpenRefine
+#'
+#' This function will check that `rrefine` is able to access the running OpenRefine instance. Used internally prior to upload, delete, and export operations.
 #'
 #' @md
 #' @return Error message if `rrefine` is unable to connect to OpenRefine, otherwise is invisible
