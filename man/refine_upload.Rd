@@ -4,7 +4,7 @@
 \alias{refine_upload}
 \title{Upload a file to OpenRefine}
 \usage{
-refine_upload(file, project.name = NULL, open.browser = FALSE)
+refine_upload(file, project.name = NULL, open.browser = FALSE, ...)
 }
 \arguments{
 \item{file}{Path to file to upload}
@@ -12,6 +12,8 @@ refine_upload(file, project.name = NULL, open.browser = FALSE)
 \item{project.name}{Optional parameter to specify name of the project to be created upon upload; default is \code{NULL} and project will be named 'Untitled' in OpenRefine}
 
 \item{open.browser}{Boolean for whether or not the browser should open on successful upload; default is \code{FALSE}}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
 Operates as a side-effect, either opening a browser and pointing to the OpenRefine instance (if \code{open.browser=TRUE}) or issuing a message.

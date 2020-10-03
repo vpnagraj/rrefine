@@ -4,7 +4,7 @@
 \alias{refine_path}
 \title{Helper function to configure and call path to OpenRefine}
 \usage{
-refine_path(host = "127.0.0.1", port = "3333")
+refine_path(host = "http://127.0.0.1", port = "3333")
 }
 \arguments{
 \item{host}{Host for running OpenRefine instance; default is \code{http://127.0.0.1}}

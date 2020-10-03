@@ -4,7 +4,10 @@
 \alias{refine_metadata}
 \title{Get all project metadata from OpenRefine}
 \usage{
-refine_metadata()
+refine_metadata(...)
+}
+\arguments{
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
 Parsed \code{list} object with all project metadata including identifiers, names, dates of creation and modification, tags and more.

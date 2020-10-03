@@ -4,7 +4,10 @@
 \alias{refine_check}
 \title{Helper function to check if \code{rrefine} can connect to OpenRefine}
 \usage{
-refine_check()
+refine_check(...)
+}
+\arguments{
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
 Error message if \code{rrefine} is unable to connect to OpenRefine, otherwise is invisible

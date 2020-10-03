@@ -5,7 +5,7 @@
 #' @param project.name Name of project to be deleted
 #' @param project.id Unique identifier for open refine project to be deleted
 #' @param force Boolean indicating whether or not the prompt to confirm deletion should be skipped; default is `FALSE`
-#'
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return Operates as a side-effect to delete the project. Issues a message that the project has been deleted.
 #' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#delete-project}
 #' @export
@@ -17,15 +17,15 @@
 #' refine_delete(project.name = "Untitled", project.id = 1901018888332)
 #' }
 #'
-refine_delete <- function(project.name = NULL, project.id = NULL, force = FALSE) {
+refine_delete <- function(project.name = NULL, project.id = NULL, force = FALSE, ...) {
 
     ## check that OpenRefine is running
-    refine_check()
+    refine_check(...)
 
     ## resolve id for project to delete from either project.name or the project.id args
-    project.id <- refine_id(project.name, project.id)
+    project.id <- refine_id(project.name, project.id, ...)
 
-    query <- refine_query("delete-project", use_token = TRUE)
+    query <- refine_query("delete-project", use_token = TRUE, ...)
 
     ## if the force option is used skip the user prompt and run the delete query
     if(force) {
@@ -47,7 +47,7 @@ refine_delete <- function(project.name = NULL, project.id = NULL, force = FALSE)
             stop("Aborting delete process")
     }
 
-    if(!project.id %in% names(refine_metadata()$projects)) {
+    if(!project.id %in% names(refine_metadata(...)$projects)) {
         message(sprintf("Project %s deleted", project.id))
     } else {
         stop(sprintf("Project %s was not successfully deleted."))

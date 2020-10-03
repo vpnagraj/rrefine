@@ -7,28 +7,30 @@
 #' @return Character vector with path to running OpenRefine instance
 #' @md
 
-refine_path <- function(host = "127.0.0.1", port ="3333") {
+refine_path <- function(host = "http://127.0.0.1", port ="3333") {
 
-    paste0("http://", host, ":", port)
+    paste0(host, ":", port)
 
 }
 
 #' Get all project metadata from OpenRefine
 #'
 #' This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API `/command/core/get-all-project-metadata` endpoint.
-#' @md
+#'
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
 #' @return Parsed `list` object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
 #' @examples
+#' @md
 #' @export
 #' \dontrun{
 #' refine_metadata()
 #' }
 #'
 
-refine_metadata <- function() {
+refine_metadata <- function(...) {
 
-    query <- refine_query("get-all-project-metadata", use_token = FALSE)
+    query <- refine_query("get-all-project-metadata", use_token = FALSE, ...)
     httr::content(httr::GET(query))
 
 }
@@ -39,10 +41,11 @@ refine_metadata <- function() {
 #'
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return Unique id of project
 #' @md
 
-refine_id <- function(project.name, project.id) {
+refine_id <- function(project.name, project.id, ...) {
 
     ## check if both arguments are NULL and stop() if so
     if (is.null(project.name) & is.null(project.id)){
@@ -52,7 +55,7 @@ refine_id <- function(project.name, project.id) {
     ## get metedata for running instance
     ## this will be used to validate the project id ...
     ## and find the id by name if project id is passed in
-    metadata <- refine_metadata()
+    metadata <- refine_metadata(...)
 
     if (!is.null(project.id)) {
 
@@ -87,14 +90,14 @@ refine_id <- function(project.name, project.id) {
 #' Helper function to check if `rrefine` can connect to OpenRefine
 #'
 #' This function will check that `rrefine` is able to access the running OpenRefine instance. Used internally prior to upload, delete, and export operations.
-#'
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @md
 #' @return Error message if `rrefine` is unable to connect to OpenRefine, otherwise is invisible
 
-refine_check <- function() {
+refine_check <- function(...) {
 
     tryCatch(
-        expr = httr::GET(refine_path()),
+        expr = httr::GET(refine_path(...)),
         error = function(e)
             cat("rrefine is unable to connect to OpenRefine ... make sure OpenRefine is running"))
 
@@ -104,13 +107,16 @@ refine_check <- function() {
 
 #' Helper function to retrieve CSFR token
 #'
-#' @return Character vector with OpenRefine CSFR token
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
-refine_token <- function() {
+#' @return Character vector with OpenRefine CSFR token
+#' @md
+#'
+refine_token <- function(...) {
 
     ## before proceeding check that OpenRefine is running
-    refine_check()
-    query <- refine_query("get-csrf-token", use_token = FALSE)
+    refine_check(...)
+    query <- refine_query("get-csrf-token", use_token = FALSE, ...)
     ## get token request response
     token <- httr::GET(query)
     ## parse response for token
@@ -123,26 +129,26 @@ refine_token <- function() {
 #'
 #' @param query Character vector specifying the API endpoint to query
 #' @param use_token Boolean indicating whether or not the query string should include a CSRF Token (see \code{\link{refine_token}}; default is `TRUE`
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return Character vector with query based on parameter entered
 #'
 #' @md
 #'
 #'
-refine_query <- function(query, use_token = TRUE) {
+refine_query <- function(query, use_token = TRUE, ...) {
 
+    base_query <- paste0(refine_path(...),
+                         "/command/core/",
+                         query)
     if(use_token) {
         ## get token request response
-        token <- refine_token()
+        token <- refine_token(...)
 
-        query <- paste0(refine_path(),
-                        "/command/core/",
-                        query,
+        query <- paste0(base_query,
                         "?csrf_token=",
                         token)
     } else {
-        query <- paste0(refine_path(),
-                        "/command/core/",
-                        query)
+        query <- base_query
     }
 
     return(query)

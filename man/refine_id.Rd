@@ -4,12 +4,14 @@
 \alias{refine_id}
 \title{Helper function to get OpenRefine project.id by project.name}
 \usage{
-refine_id(project.name, project.id)
+refine_id(project.name, project.id, ...)
 }
 \arguments{
 \item{project.name}{Name of project}
 
 \item{project.id}{Unique identifier for project}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
 Unique id of project

@@ -4,12 +4,14 @@
 \alias{refine_query}
 \title{Helper function to build OpenRefine API query}
 \usage{
-refine_query(query, use_token = TRUE)
+refine_query(query, use_token = TRUE, ...)
 }
 \arguments{
 \item{query}{Character vector specifying the API endpoint to query}
 
 \item{use_token}{Boolean indicating whether or not the query string should include a CSRF Token (see \code{\link{refine_token}}; default is \code{TRUE}}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
 Character vector with query based on parameter entered

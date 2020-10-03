@@ -7,7 +7,7 @@
 #' @param format File format of project to be exported; note that the only current supported option is 'csv'
 #' @param col.names Logical indicator for whether column names should be included; default is `TRUE`
 #' @param encoding Character encoding for exported data; default is `UTF-8`
-#'
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return A `tibble` that has been parsed and read into memory using \code{\link[readr]{read_csv}}. If `col.names=TRUE` then the `tibble` will have column headers.
 #'
 #' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#export-rows}
@@ -21,17 +21,17 @@
 #' }
 #'
 
-refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8") {
+refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8", ...) {
 
     ## check that OpenRefine is running
-    refine_check()
+    refine_check(...)
 
     ## resolve id for project to export from either project.name or the project.id args
-    project.id <- refine_id(project.name, project.id)
+    project.id <- refine_id(project.name, project.id, ...)
 
     ## export should work without token
     ## NOTE: need to paste0 to append project.id and format args
-    query <- paste0(refine_query("export-rows", use_token = FALSE),
+    query <- paste0(refine_query("export-rows", use_token = FALSE, ...),
                     "/",
                     project.id,
                     ".",
