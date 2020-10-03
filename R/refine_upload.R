@@ -24,17 +24,37 @@ refine_upload <- function(file, project.name = NULL , open.browser = FALSE) {
 
     ## define upload query
     query <- refine_query("create-project-from-upload", use_token = TRUE)
-    ## post project to refine
+
+    ## get list of project ids for the refine instance pre upload
+    pre_upload <- names(refine_metadata()$projects)
+
+    ## try to post project to refine
     httr::POST(query,
                body = list(
         "project-file" = httr::upload_file(file),
         "project-name" = project.name)
         )
 
-    ## open browser
-    if (open.browser) {
-        utils::browseURL(refine_path())
-    } else {
-        message("Attempting ")
+    ## get list of project ids after upload
+    post_upload <- names(refine_metadata()$projects)
+
+    ## we don't know what the new project id will be ...
+    ## so to check successful upload we use logic that if there are *more* ids post upload ...
+    ## then the upload was successful
+    if(length(post_upload) > length(pre_upload)) {
+
+        new_id <- setdiff(post_upload, pre_upload)
+        new_url <- paste0(refine_path(), "/project?project=", new_id)
+        ## open browser
+        if (open.browser) {
+            utils::browseURL(new_url)
+        } else {
+            message(sprintf("Upload successful. Visit %s to view the project in OpenRefine.", new_url))
+        }
+        ## if not and if the ids are the same pre/post upload ...
+        ## then assume upload was unsuccessful
+    } else if (all(post_upload == pre_upload)) {
+        stop("Upload was unsuccessful. Check the contents of the file and/or try uploading through the web interface to debug.")
     }
+
 }
