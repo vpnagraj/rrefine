@@ -1,10 +1,8 @@
 # rrefine
 
-<div>
-<a href="https://travis-ci.org/vpnagraj/rrefine"><img src="https://travis-ci.org/vpnagraj/rrefine.svg?branch=master" alt="Travis CI Status"></img></a> 
-[![CRAN Release](http://www.r-pkg.org/badges/version/rrefine)](https://cran.r-project.org/packages=rrefine) 
+[![CRAN Status](http://www.r-pkg.org/badges/version/rrefine)](https://cran.r-project.org/package=rrefine)
+[![Build Status](https://travis-ci.org/vpnagraj/rrefine.svg?branch=master)](https://travis-ci.org/vpnagraj/rrefine)
 ![](http://cranlogs.r-pkg.org/badges/rrefine)
-</div>
 
 ## Introduction
 
