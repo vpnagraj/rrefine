@@ -12,12 +12,6 @@ Parsed \code{list} object with all project metadata including identifiers, names
 \description{
 This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API \code{/command/core/get-all-project-metadata} endpoint.
 }
-\examples{
-\dontrun{
-refine_metadata()
-}
-
-}
 \references{
 \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
 }

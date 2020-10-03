@@ -20,6 +20,7 @@ refine_path <- function(host = "127.0.0.1", port ="3333") {
 #' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
 #' @return Parsed `list` object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
 #' @examples
+#' @export
 #' \dontrun{
 #' refine_metadata()
 #' }
