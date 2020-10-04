@@ -18,3 +18,5 @@ Suggests: knitr,
 VignetteBuilder: knitr
 URL: https://github.com/vpnagraj/rrefine
 BugReports: https://github.com/vpnagraj/rrefine/issues
+Encoding: UTF-8
+
