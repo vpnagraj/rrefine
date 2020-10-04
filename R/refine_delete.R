@@ -12,9 +12,9 @@
 #' @md
 #' @examples
 #' \dontrun{
-#' refine_delete(project.name = "foo")
-#' refine_delete(project.id = 1901017388690)
-#' refine_delete(project.name = "Untitled", project.id = 1901018888332)
+#' fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+#' refine_upload(fp, project.name = "lfm")
+#' refine_delete("lfm", force = TRUE)
 #' }
 #'
 refine_delete <- function(project.name = NULL, project.id = NULL, force = FALSE, ...) {

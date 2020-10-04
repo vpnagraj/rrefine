@@ -12,8 +12,10 @@
 #' @md
 #' @examples
 #' \dontrun{
-#' write.csv(x = mtcars, file = "mtcars.csv")
-#' refine_upload(file = "mtcars.csv", project.name = "mtcars_clean_up")
+#' fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+#' refine_upload(fp, project.name = "lfm")
+#' write.table(x = mtcars, file = "mtcars.tsv", sep = "\t")
+#' refine_upload(file = "mtcars.tsv", project.name = "mtcars")
 #' }
 #'
 

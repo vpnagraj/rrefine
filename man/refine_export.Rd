@@ -28,9 +28,9 @@ This function allows users to pull data from a running OpenRefine instance into 
 }
 \examples{
 \dontrun{
-refine_export("purple_rain")
-refine_export(project.id = 1901017388690, format = "csv")
-refine_export(project.name = "Untitled", project.id = 1901017388888)
+fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+refine_upload(fp, project.name = "lfm")
+refine_export("lfm", format = "csv")
 }
 
 }
