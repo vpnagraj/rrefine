@@ -22,6 +22,11 @@ refine_upload <- function(file, project.name = NULL , open.browser = FALSE, ...)
     ## check that OpenRefine is running
     refine_check(...)
 
+    ## check that file exits before trying to proceed
+    if(!file.exists(file)) {
+        stop("Path to upload file could not be resolved. Check that the file exists.")
+    }
+
     ## define upload query
     query <- refine_query("create-project-from-upload", use_token = TRUE, ...)
 
