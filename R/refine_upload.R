@@ -2,7 +2,7 @@
 #'
 #' This function attempts to upload contents of a file and create a new project in OpenRefine. Users can optionally navigate directly to the running instance to interact with the project. The function wraps the OpenRefine API `/command/core/create-project-from-upload` query.
 #'
-#' @param file Path to file to upload
+#' @param file Path to file to upload; upload format is inferred from the file extension, and currently only ".csv" and ".tsv" files are allowed.
 #' @param project.name Optional parameter to specify name of the project to be created upon upload; default is `NULL` and project will be named 'Untitled' in OpenRefine
 #' @param open.browser Boolean for whether or not the browser should open on successful upload; default is `FALSE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
@@ -28,12 +28,24 @@ refine_upload <- function(file, project.name = NULL , open.browser = FALSE, ...)
     ## get list of project ids for the refine instance pre upload
     pre_upload <- names(refine_metadata(...)$projects)
 
+    ## get format from the file extension
+    ## format will be used in POST request below
+    ## this logic includes a check to stop() if the inferred format is not one of the allowed values
+    format <- tools::file_ext(file)
+    if(format %in% c("csv", "tsv")) {
+        format <- paste0("text/line-based/", format)
+    } else {
+        stop(sprintf("Upload file extension is %s. Format must be 'csv' or 'tsv'", format))
+    }
+
     ## try to post project to refine
     httr::POST(query,
                body = list(
         "project-file" = httr::upload_file(file),
-        "project-name" = project.name)
+        "project-name" = project.name,
+        "format" = format
         )
+    )
 
     ## get list of project ids after upload
     post_upload <- names(refine_metadata(...)$projects)

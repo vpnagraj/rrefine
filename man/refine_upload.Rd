@@ -7,7 +7,7 @@
 refine_upload(file, project.name = NULL, open.browser = FALSE, ...)
 }
 \arguments{
-\item{file}{Path to file to upload}
+\item{file}{Path to file to upload; upload format is inferred from the file extension, and currently only ".csv" and ".tsv" files are allowed.}
 
 \item{project.name}{Optional parameter to specify name of the project to be created upon upload; default is \code{NULL} and project will be named 'Untitled' in OpenRefine}
 
