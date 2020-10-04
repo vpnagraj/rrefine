@@ -20,9 +20,9 @@ refine_path <- function(host = "http://127.0.0.1", port ="3333") {
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
 #' @return Parsed `list` object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
-#' @examples
 #' @md
 #' @export
+#' @examples
 #' \dontrun{
 #' refine_metadata()
 #' }
