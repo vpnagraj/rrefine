@@ -12,7 +12,7 @@ refine_export(project.name = NULL, project.id = NULL, format = "csv",
 
 \item{project.id}{Unique identifier for project to be exported}
 
-\item{format}{File format of project to be exported; note that the only current supported option is 'csv'}
+\item{format}{File format of project to be exported; note that the only current supported options are 'csv' or 'tsv'}
 
 \item{col.names}{Logical indicator for whether column names should be included; default is \code{TRUE}}
 

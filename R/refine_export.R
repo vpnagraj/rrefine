@@ -4,7 +4,7 @@
 #'
 #' @param project.name Name of project to be exported
 #' @param project.id Unique identifier for project to be exported
-#' @param format File format of project to be exported; note that the only current supported option is 'csv'
+#' @param format File format of project to be exported; note that the only current supported options are 'csv' or 'tsv'
 #' @param col.names Logical indicator for whether column names should be included; default is `TRUE`
 #' @param encoding Character encoding for exported data; default is `UTF-8`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
@@ -29,6 +29,10 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
     ## resolve id for project to export from either project.name or the project.id args
     project.id <- refine_id(project.name, project.id, ...)
 
+    ## check that format parameter matches the allowed values
+    if(!format %in% c("csv","tsv")) {
+        stop(sprintf("Format specified as %s. Currently only 'csv' and 'tsv' export formats are allowed.", format))
+    }
     ## export should work without token
     ## NOTE: need to paste0 to append project.id and format args
     query <- paste0(refine_query("export-rows", use_token = FALSE, ...),
@@ -52,10 +56,14 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
         stop(sprintf("OpenRefine failed to find project id '%s'", project.id))
 
     cont <- httr::content(res,
-                          type = "text/csv",
+                          type = paste0("text/", format),
                           as = "text",
                           encoding = encoding)
 
-    readr::read_csv(cont, col_names = col.names, col_types = NULL)
+    if(format == "csv") {
+        readr::read_csv(cont, col_names = col.names, col_types = NULL)
+    } else if (format == "tsv") {
+        readr::read_tsv(cont, col_names = col.names, col_types = NULL)
+    }
 
 }
