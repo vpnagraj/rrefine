@@ -1,7 +1,7 @@
 Package: rrefine
 Type: Package
 Title: r Client for OpenRefine API
-Version: 0.1
+Version: 1.1.0
 Date: 2016-03-26
 Authors@R: c(person("VP", "Nagraj", role = c("aut", "cre"), email = "nagraj@nagraj.net"))
 Maintainer: VP Nagraj <nagraj@nagraj.net>
@@ -18,3 +18,5 @@ Suggests: knitr,
 VignetteBuilder: knitr
 URL: https://github.com/vpnagraj/rrefine
 BugReports: https://github.com/vpnagraj/rrefine/issues
+Encoding: UTF-8
+

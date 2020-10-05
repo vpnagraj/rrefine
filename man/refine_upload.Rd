@@ -2,24 +2,34 @@
 % Please edit documentation in R/refine_upload.R
 \name{refine_upload}
 \alias{refine_upload}
-\title{upload a csv file to OpenRefine}
+\title{Upload a file to OpenRefine}
 \usage{
-refine_upload(file, project.name = NULL, open.browser = FALSE)
+refine_upload(file, project.name = NULL, open.browser = FALSE, ...)
 }
 \arguments{
-\item{file}{Name of csv file to be uploaded}
+\item{file}{Path to file to upload; upload format is inferred from the file extension, and currently only ".csv" and ".tsv" files are allowed.}
 
-\item{project.name}{optional parameter to specify name of the project to be created upon upload, default is NULL and project will be named 'Untitled' in OpenRefine}
+\item{project.name}{Optional parameter to specify name of the project to be created upon upload; default is \code{NULL} and project will be named 'Untitled' in OpenRefine}
 
-\item{open.browser}{logical for whether or not the browser should open on successful upload}
+\item{open.browser}{Boolean for whether or not the browser should open on successful upload; default is \code{FALSE}}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+}
+\value{
+Operates as a side-effect, either opening a browser and pointing to the OpenRefine instance (if \code{open.browser=TRUE}) or issuing a message.
 }
 \description{
-upload a csv file to OpenRefine
+This function attempts to upload contents of a file and create a new project in OpenRefine. Users can optionally navigate directly to the running instance to interact with the project. The function wraps the OpenRefine API \code{/command/core/create-project-from-upload} query.
 }
 \examples{
 \dontrun{
-write.csv(x = mtcars, file = "mtcars.csv")
-refine_upload(file = "mtcars.csv", project.name = "mtcars_clean_up")
+fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+refine_upload(fp, project.name = "lfm")
+write.table(x = mtcars, file = "mtcars.tsv", sep = "\\t")
+refine_upload(file = "mtcars.tsv", project.name = "mtcars")
 }
 
+}
+\references{
+\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#create-project}
 }

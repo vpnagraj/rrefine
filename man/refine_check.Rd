@@ -2,13 +2,16 @@
 % Please edit documentation in R/utils.R
 \name{refine_check}
 \alias{refine_check}
-\title{helper function to check if rrefine can connect to OpenRefine}
+\title{Helper function to check if \code{rrefine} can connect to OpenRefine}
 \usage{
-refine_check()
+refine_check(...)
+}
+\arguments{
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
 }
 \value{
-error message if rrefine is unable to connect to OpenRefine, otherwise is invisible
+Error message if \code{rrefine} is unable to connect to OpenRefine, otherwise is invisible
 }
 \description{
-helper function to check if rrefine can connect to OpenRefine
+This function will check that \code{rrefine} is able to access the running OpenRefine instance. Used internally prior to upload, delete, and export operations.
 }

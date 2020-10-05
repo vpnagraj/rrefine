@@ -2,4 +2,5 @@
 
 export(refine_delete)
 export(refine_export)
+export(refine_metadata)
 export(refine_upload)
