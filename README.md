@@ -18,7 +18,7 @@ devtools::install_github("vpnagraj/rrefine")
 library(rrefine)
 ```
 
-**rrefine** is also available on [CRAN](https://cran.r-project.org/web/packages/rrefine/index.html):
+**rrefine** is also available on [CRAN](https://cran.r-project.org/package=rrefine):
 
 ```
 install.packages("rrefine")
@@ -33,7 +33,7 @@ The package includes the following functionality:
 - `refine_delete()` (delete **OpenRefine** project)
 - `refine_metdata()` (get all metedata for **OpenRefine** projects)
 
-Descriptions and examples of usage are available in the package [manual](https://cran.r-project.org/web/packages/rrefine/rrefine.pdf) and [vignette](https://cran.r-project.org/web/packages/rrefine/vignettes/rrefine-vignette.html).
+Descriptions and examples of usage are available in the package [manual](https://cran.r-project.org/package=rrefine/rrefine.pdf) and [vignette](https://cran.r-project.org/package=rrefine/vignettes/rrefine-vignette.html).
 
 ## Issues
 

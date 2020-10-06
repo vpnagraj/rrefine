@@ -71,6 +71,6 @@ refine_delete(project.name = "lfm_cleanup")
 
 ## References
 
-[^1]: <http://openrefine.org/>
+[^1]: <https://openrefine.org/>
 [^2]: <https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Developers#known-client-libraries-for-refine>
-[^3]: <http://openrefine.org/download.html>
+[^3]: <https://openrefine.org/download.html>
