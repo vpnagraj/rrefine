@@ -69,12 +69,8 @@ refine_id <- function(project.name, project.id, ...) {
 
     ## if project id is null then try to get the id from name
     } else {
-        name <- NULL
-        id <- names(rlist::list.mapv(
-        rlist::list.filter(metadata[["projects"]],
-            name == project.name),
-        name))
-
+        tmp <- lapply(metadata$projects, function(x) x$name)
+        id <- names(tmp[tmp == project.name])
         if (length(id) == 1) {
             project.id <- id
         } else if (length(id) == 0) {

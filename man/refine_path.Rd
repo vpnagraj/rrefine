@@ -7,7 +7,7 @@
 refine_path(host = "http://127.0.0.1", port = "3333")
 }
 \arguments{
-\item{host}{Host for running OpenRefine instance; default is \code{http://127.0.0.1}}
+\item{host}{Host for running OpenRefine instance; default is \verb{http://127.0.0.1}}
 
 \item{port}{Port number for running OpenRefine instance; default is \code{3333}}
 }
@@ -15,5 +15,5 @@ refine_path(host = "http://127.0.0.1", port = "3333")
 Character vector with path to running OpenRefine instance
 }
 \description{
-This function is a helper that is used throughout \code{rrefine} to construct the path to the OpenRefine instance. By default this points to the localhost (\code{http://127.0.0.1:3333}).
+This function is a helper that is used throughout \code{rrefine} to construct the path to the OpenRefine instance. By default this points to the localhost (\verb{http://127.0.0.1:3333}).
 }

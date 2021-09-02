@@ -7,13 +7,13 @@
 refine_metadata(...)
 }
 \arguments{
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
 Parsed \code{list} object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
 }
 \description{
-This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API \code{/command/core/get-all-project-metadata} endpoint.
+This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API \verb{/command/core/get-all-project-metadata} endpoint.
 }
 \examples{
 \dontrun{

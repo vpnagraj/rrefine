@@ -1,18 +1,11 @@
 ## Test environments
 
-* local OS X install, R 3.6.1
+* local OS X install, R 4.0.3
 * rhub
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
-
-There was 1 NOTE in check log produced by rhub:
-
-New maintainer:
-  VP Nagraj <nagraj@nagraj.net>
-Old maintainer(s):
-  VP Nagraj <vpnagraj@virginia.edu>
+There were no ERRORs or WARNINGs or NOTEs.
 
 ## Downstream dependencies
 

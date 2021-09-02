@@ -4,13 +4,15 @@
 \name{lfm_clean}
 \alias{lfm_clean}
 \title{a "clean" version of the lateformeeting sample data set}
-\format{A data frame with 63 rows and 4 variables
+\format{
+A data frame with 63 rows and 4 variables
 \itemize{
   \item {date} {date of observation in POSIXct format}
   \item {dotw} {day of the week in consistent format}
   \item {hours.slept} {number of hours slept}
   \item {on.time} {indicator of on-time arrival to work}
-}}
+}
+}
 \usage{
 lfm_clean
 }

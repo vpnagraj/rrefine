@@ -13,19 +13,19 @@ refine_upload(file, project.name = NULL, open.browser = FALSE, ...)
 
 \item{open.browser}{Boolean for whether or not the browser should open on successful upload; default is \code{FALSE}}
 
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
 Operates as a side-effect, either opening a browser and pointing to the OpenRefine instance (if \code{open.browser=TRUE}) or issuing a message.
 }
 \description{
-This function attempts to upload contents of a file and create a new project in OpenRefine. Users can optionally navigate directly to the running instance to interact with the project. The function wraps the OpenRefine API \code{/command/core/create-project-from-upload} query.
+This function attempts to upload contents of a file and create a new project in OpenRefine. Users can optionally navigate directly to the running instance to interact with the project. The function wraps the OpenRefine API \verb{/command/core/create-project-from-upload} query.
 }
 \examples{
 \dontrun{
 fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 refine_upload(fp, project.name = "lfm")
-write.table(x = mtcars, file = "mtcars.tsv", sep = "\\t")
+write.table(x = mtcars, file = "mtcars.tsv", sep = "\t")
 refine_upload(file = "mtcars.tsv", project.name = "mtcars")
 }
 
