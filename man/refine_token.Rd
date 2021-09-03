@@ -7,7 +7,7 @@
 refine_token(...)
 }
 \arguments{
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
 Character vector with OpenRefine CSFR token

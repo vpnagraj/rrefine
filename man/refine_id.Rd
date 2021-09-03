@@ -11,7 +11,7 @@ refine_id(project.name, project.id, ...)
 
 \item{project.id}{Unique identifier for project}
 
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
 Unique id of project

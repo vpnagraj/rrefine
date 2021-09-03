@@ -4,13 +4,15 @@
 \name{lateformeeting}
 \alias{lateformeeting}
 \title{a "dirty" data set to demonstrate rrefine features}
-\format{A data frame with 63 rows and 4 variables
+\format{
+A data frame with 63 rows and 4 variables
 \itemize{
   \item {theDate} {date of observation in varying formats}
   \item {what.day.whas.it} {day of the week in varying formats}
   \item {sleephours} {number of hours slept}
   \item {was.i.on.time.for.work} {indicator of on-time arrival to work}
-}}
+}
+}
 \usage{
 lateformeeting
 }

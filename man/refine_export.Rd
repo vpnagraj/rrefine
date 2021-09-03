@@ -4,8 +4,14 @@
 \alias{refine_export}
 \title{Export data from OpenRefine}
 \usage{
-refine_export(project.name = NULL, project.id = NULL, format = "csv",
-  col.names = TRUE, encoding = "UTF-8", ...)
+refine_export(
+  project.name = NULL,
+  project.id = NULL,
+  format = "csv",
+  col.names = TRUE,
+  encoding = "UTF-8",
+  ...
+)
 }
 \arguments{
 \item{project.name}{Name of project to be exported}
@@ -18,13 +24,13 @@ refine_export(project.name = NULL, project.id = NULL, format = "csv",
 
 \item{encoding}{Character encoding for exported data; default is \code{UTF-8}}
 
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \code{http://127.0.0.1:3333}}
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
 A \code{tibble} that has been parsed and read into memory using \code{\link[readr]{read_csv}}. If \code{col.names=TRUE} then the \code{tibble} will have column headers.
 }
 \description{
-This function allows users to pull data from a running OpenRefine instance into R. Users can specify project by name or unique identifier. The function wraps the OpenRefine API query to \code{/command/core/export-rows} and currently only supports export of data in tabular format.
+This function allows users to pull data from a running OpenRefine instance into R. Users can specify project by name or unique identifier. The function wraps the OpenRefine API query to \verb{/command/core/export-rows} and currently only supports export of data in tabular format.
 }
 \examples{
 \dontrun{

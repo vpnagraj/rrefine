@@ -1,3 +1,7 @@
+# rrefine 1.1.1
+
+The only update in this release is the removal of one of the package dependencies (`rlist`), which has been scheduled to be archived per the CRAN team. This change is required for continued distribution of `rrefine` via CRAN. Functions from `rlist` were only used in an unexported `rrefine` helper, and there are no anticipated user-facing changes in this release.
+
 # rrefine 1.1.0
 
 This release includes a number of new features, more robust checks and internal logic, and many improvements to package documentation. Most significantly, this version introduces support for the Cross-Site Request Forgery (CSRF) token in OpenRefine API requests, which is required in certain API calls as of OpenRefine v3.3. This feature is now included in `rrefine` but operates internally and should be invisible to users. For more information the OpenRefine CSRF protection see: https://github.com/OpenRefine/OpenRefine/wiki/Changes-for-3.3#csrf-protection-changes
