@@ -7,6 +7,7 @@
 #' @param format File format of project to be exported; note that the only current supported options are 'csv' or 'tsv'
 #' @param col.names Logical indicator for whether column names should be included; default is `TRUE`
 #' @param encoding Character encoding for exported data; default is `UTF-8`
+#' @param col_types One of NULL, a cols() specification, or a string; default is NULL. Used by \code{\link[readr]{read_csv}} to specify column types.
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return A `tibble` that has been parsed and read into memory using \code{\link[readr]{read_csv}}. If `col.names=TRUE` then the `tibble` will have column headers.
 #'
@@ -21,7 +22,7 @@
 #' }
 #'
 
-refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8", ...) {
+refine_export <- function(project.name = NULL, project.id = NULL, format = "csv", col.names = TRUE, encoding = "UTF-8", col_types = NULL, ...) {
 
     ## check that OpenRefine is running
     refine_check(...)
@@ -61,9 +62,9 @@ refine_export <- function(project.name = NULL, project.id = NULL, format = "csv"
                           encoding = encoding)
 
     if(format == "csv") {
-        readr::read_csv(cont, col_names = col.names, col_types = NULL)
+        readr::read_csv(cont, col_names = col.names, col_types = col_types)
     } else if (format == "tsv") {
-        readr::read_tsv(cont, col_names = col.names, col_types = NULL)
+        readr::read_tsv(cont, col_names = col.names, col_types = col_types)
     }
 
 }

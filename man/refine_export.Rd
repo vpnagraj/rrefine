@@ -10,6 +10,7 @@ refine_export(
   format = "csv",
   col.names = TRUE,
   encoding = "UTF-8",
+  col_types = NULL,
   ...
 )
 }
@@ -23,6 +24,8 @@ refine_export(
 \item{col.names}{Logical indicator for whether column names should be included; default is \code{TRUE}}
 
 \item{encoding}{Character encoding for exported data; default is \code{UTF-8}}
+
+\item{col_types}{One of NULL, a cols() specification, or a string; default is NULL. Used by \code{\link[readr]{read_csv}} to specify column types.}
 
 \item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
