@@ -1,3 +1,11 @@
+# rrefine 1.1.2
+
+Minor release to incorporate new features. 
+
+## New Features
+
+- When using `refine_export` the user can now specify "col_types" for tabular format returned. Thanks to @joelnitta for the contribution!
+
 # rrefine 1.1.1
 
 The only update in this release is the removal of one of the package dependencies (`rlist`), which has been scheduled to be archived per the CRAN team. This change is required for continued distribution of `rrefine` via CRAN. Functions from `rlist` were only used in an unexported `rrefine` helper, and there are no anticipated user-facing changes in this release.
