@@ -3,6 +3,7 @@
 [![CRAN Status](http://www.r-pkg.org/badges/version/rrefine)](https://cran.r-project.org/package=rrefine)
 [![Build Status](https://travis-ci.org/vpnagraj/rrefine.svg?branch=master)](https://travis-ci.org/vpnagraj/rrefine)
 ![](http://cranlogs.r-pkg.org/badges/rrefine)
+![](https://cranlogs.r-pkg.org/badges/grand-total/rrefine)
 
 ## Introduction
 
