@@ -1,7 +1,7 @@
 Package: rrefine
 Type: Package
 Title: r Client for OpenRefine API
-Version: 1.1.2
+Version: 1.2.0
 Date: 2021-10-02
 Authors@R: c(person("VP", "Nagraj", role = c("aut", "cre"), email = "nagraj@nagraj.net"))
 Maintainer: VP Nagraj <nagraj@nagraj.net>
@@ -11,7 +11,8 @@ LazyData: TRUE
 RoxygenNote: 7.1.1
 Imports:
     httr (>= 1.1.0),
-    readr
+    readr,
+    jsonlite
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
