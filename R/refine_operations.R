@@ -36,3 +36,54 @@ refine_operations <- function(project.name = NULL, project.id = NULL, operations
 
 
 }
+
+
+#' Title
+#'
+#' @param column Name of the column to be removed
+#' @param project.name Name of project to be exported
+#' @param project.id Unique identifier for project to be exported
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#'
+#' @return
+#' @export
+#'
+refine_remove_column <- function(column, project.name = NULL, project.id = NULL, ...) {
+
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(list(op = "core/column-removal", columnName = column)),
+                      ...)
+}
+
+#' Title
+#'
+#' @param column Name of the column to be removed
+#' @param project.name Name of project to be exported
+#' @param project.id Unique identifier for project to be exported
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#'
+#' @return
+#' @export
+#'
+refine_add_column <- function(new_column, new_column_index, base_column = NULL, value, on_error = "set-to-blank", description = NULL, project.name = NULL, project.id = NULL, ...) {
+
+    ops <-
+        list(
+            op = "core/column-addition",
+            description = description,
+            engineConfig = list(mode = "row-based", facets = list()),
+            newColumnName = new_column,
+            columnInsertIndex = new_column_index,
+            expression = value,
+            onError = on_error)
+
+    if(!is.null(base_column)) {
+        ops <- c(ops, baseColumnName = base_column)
+    }
+
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(ops),
+                      ...)
+}
