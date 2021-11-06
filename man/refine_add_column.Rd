@@ -2,31 +2,54 @@
 % Please edit documentation in R/refine_operations.R
 \name{refine_add_column}
 \alias{refine_add_column}
-\title{Title}
+\title{Add column to OpenRefine project}
 \usage{
 refine_add_column(
   new_column,
-  new_column_index,
-  base_column,
+  new_column_index = 0,
+  base_column = NULL,
   value,
   on_error = "set-to-blank",
+  description = NULL,
   project.name = NULL,
   project.id = NULL,
+  verbose = FALSE,
   ...
 )
 }
 \arguments{
-\item{project.name}{Name of project to be exported}
+\item{new_column}{Name of the new column}
 
-\item{project.id}{Unique identifier for project to be exported}
+\item{new_column_index}{Index at which the new column should be placed in the project; default is \code{0} to position the new column as the first column in the project}
 
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`}
+\item{base_column}{Name of the column on which the value will be based; default is \code{NULL}, which means that the value will not be based off of a value in an existing column}
 
-\item{column}{Name of the column to be removed}
+\item{value}{Definition of the value for the new column; can accept a GREL expression}
+
+\item{on_error}{Behavior if there is an error on new column creation; must be one of \code{"set-to-blank"}, \code{"keep-original"}, or \code{"store-error"}; default is \code{"set-to-blank"}}
+
+\item{description}{Text describing the operation performed}
+
+\item{project.name}{Name of project}
+
+\item{project.id}{Unique identifier for project}
+
+\item{verbose}{Logical specifying whether or not query result should be printed; default is \code{FALSE}}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
-
+Operates as a side-effect passing operations to the OpenRefine instance. However, if \code{verbose=TRUE} then the function will return an object of the class "response".
 }
 \description{
-Title
+This function will add a column to an existing OpenRefine project via an API query to \verb{/command/core/apply-operations} and the \code{core/column-addition} operation. The value for the new column can be specified in this function either based on value of an existing column. The value can be defined using an expression written in \href{https://docs.openrefine.org/manual/grel}{General Refine Expression Language (GREL)} syntax.
+}
+\examples{
+\dontrun{
+fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+refine_upload(fp, project.name = "lfm")
+
+refine_add_column(new_column = "date_type", new_column_index = 0, value = "grel:value.type()", base_column = "theDate", description = "Adding new column based on theDate", project.name = "lfm")
+refine_add_column(new_column = "example_value", new_column_index = 0, value = "1", description = "Adding new column with all rows populated with arbitrary value", project.name = "lfm")
+}
 }

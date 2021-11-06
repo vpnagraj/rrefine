@@ -2,22 +2,39 @@
 % Please edit documentation in R/refine_operations.R
 \name{refine_remove_column}
 \alias{refine_remove_column}
-\title{Title}
+\title{Remove column from OpenRefine project}
 \usage{
-refine_remove_column(column, project.name = NULL, project.id = NULL, ...)
+refine_remove_column(
+  column,
+  project.name = NULL,
+  project.id = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{column}{Name of the column to be removed}
 
-\item{project.name}{Name of project to be exported}
+\item{project.name}{Name of project}
 
-\item{project.id}{Unique identifier for project to be exported}
+\item{project.id}{Unique identifier for project}
 
-\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`}
+\item{verbose}{Logical specifying whether or not query result should be printed; default is \code{FALSE}}
+
+\item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
-
+Operates as a side-effect passing operations to the OpenRefine instance. However, if \code{verbose=TRUE} then the function will return an object of the class "response".
 }
 \description{
-Title
+This function will remove a column from an existing OpenRefine project via an API query to \verb{/command/core/apply-operations} and the \code{core/column-removal} operation.
+}
+\examples{
+\dontrun{
+fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+refine_upload(fp, project.name = "lfm")
+
+refine_remove_column(column = "theDate", project.name = "lfm")
+}
+
 }
