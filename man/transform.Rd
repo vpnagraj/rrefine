@@ -24,6 +24,7 @@ refine_transform(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -34,6 +35,7 @@ refine_to_lower(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -44,6 +46,7 @@ refine_to_upper(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -54,6 +57,7 @@ refine_to_title(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -64,6 +68,7 @@ refine_to_null(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -74,6 +79,7 @@ refine_to_empty(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -84,6 +90,7 @@ refine_to_text(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -94,6 +101,7 @@ refine_to_number(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -104,6 +112,7 @@ refine_to_date(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -114,6 +123,7 @@ refine_trim_whitespace(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -124,6 +134,7 @@ refine_collapse_whitespace(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 
@@ -134,6 +145,7 @@ refine_unescape_html(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 }
@@ -151,6 +163,8 @@ refine_unescape_html(
 \item{project.id}{Unique identifier for project}
 
 \item{verbose}{Logical specifying whether or not query result should be printed; default is \code{FALSE}}
+
+\item{validate}{Logical as to whether or not the operation should validate parameters against existing data in project; default is \code{TRUE}}
 
 \item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }

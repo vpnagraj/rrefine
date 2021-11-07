@@ -71,6 +71,7 @@ refine_operations <- function(project.name = NULL, project.id = NULL, verbose = 
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param validate Logical as to whether or not the operation should validate parameters against existing data in project; default is `TRUE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @md
@@ -86,7 +87,15 @@ refine_operations <- function(project.name = NULL, project.id = NULL, verbose = 
 #'
 #' @export
 #'
-refine_remove_column <- function(column, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_remove_column <- function(column, project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
+
+    if(validate) {
+        ## conditionally check if column exists in the project
+        project_cols <- names(refine_export(project.name = project.name, project.id = project.id, ...))
+        if(!column %in% project_cols) {
+            stop(sprintf("The project does not contain a column named %s", column))
+        }
+    }
 
     refine_operations(project.name = project.name,
                       project.id = project.id,
@@ -109,6 +118,7 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param validate Logical as to whether or not the operation should validate parameters against existing data in project; default is `TRUE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @md
@@ -131,7 +141,17 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #' }
 #' @export
 #'
-refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
+
+    if(validate) {
+        if(!is.null(base_column)) {
+            ## conditionally check if column exists in the project
+            project_cols <- names(refine_export(project.name = project.name, project.id = project.id, ...))
+            if(!base_column %in% project_cols) {
+                stop(sprintf("The project does not contain a column named %s", base_column))
+            }
+        }
+    }
 
     ops <-
         list(
@@ -162,6 +182,7 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param validate Logical as to whether or not the operation should validate parameters against existing data in project; default is `TRUE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
@@ -178,7 +199,15 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #' }
 #'
 #'
-refine_rename_column <- function(original_name, new_name, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_rename_column <- function(original_name, new_name, project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
+
+    if(validate) {
+        ## conditionally check if column exists in the project
+        project_cols <- names(refine_export(project.name = project.name, project.id = project.id, ...))
+        if(!original_name %in% project_cols) {
+            stop(sprintf("The project does not contain a column named %s", original_name))
+        }
+    }
 
     ops <-
         list(
@@ -202,6 +231,7 @@ refine_rename_column <- function(original_name, new_name, project.name = NULL, p
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param validate Logical as to whether or not the operation should validate parameters against existing data in project; default is `TRUE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
@@ -219,8 +249,21 @@ refine_rename_column <- function(original_name, new_name, project.name = NULL, p
 #' }
 #'
 #'
-refine_move_column <- function(column, index = 0, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_move_column <- function(column, index = 0, project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
+    if(validate) {
+        ## conditionally check if column exists in the project
+        project_cols <- names(refine_export(project.name = project.name, project.id = project.id, ...))
+        if(!column %in% project_cols) {
+            stop(sprintf("The project does not contain a column named %s", column))
+        }
+
+        ## check if the index is greater than the number of columns
+        ## NOTE: need minus 1 here because indexing for OpenRefine starts at 0
+        if(index > length(project_cols) - 1) {
+            stop(sprintf("The index specified exceeds the number of columns in the project."))
+        }
+    }
     ops <-
         list(
             op = "core/column-move",
@@ -249,6 +292,7 @@ refine_move_column <- function(column, index = 0, project.name = NULL, project.i
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param validate Logical as to whether or not the operation should validate parameters against existing data in project; default is `TRUE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @details
@@ -305,7 +349,15 @@ refine_move_column <- function(column, index = 0, project.name = NULL, project.i
 #'
 #' }
 #'
-refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
+
+    if(validate) {
+        ## conditionally check if column exists in the project
+        project_cols <- names(refine_export(project.name = project.name, project.id = project.id, ...))
+        if(!column_name %in% project_cols) {
+            stop(sprintf("The project does not contain a column named %s", column_name))
+        }
+    }
 
     ops <-
         list(
@@ -324,7 +376,7 @@ refine_transform <- function(column_name, expression, mode = "row-based", on_err
 
 #' @export
 #' @rdname transform
-refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toLowercase()",
@@ -333,13 +385,14 @@ refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toUppercase()",
@@ -348,13 +401,14 @@ refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toTitlecase()",
@@ -363,13 +417,14 @@ refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "null",
@@ -378,13 +433,14 @@ refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-b
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "\"\"",
@@ -393,13 +449,14 @@ refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toString()",
@@ -408,13 +465,14 @@ refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-b
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toNumber()",
@@ -423,13 +481,14 @@ refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toDate()",
@@ -438,13 +497,14 @@ refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-b
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.trim()",
@@ -453,13 +513,14 @@ refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.replace(/\\s+/,' ')",
@@ -468,13 +529,14 @@ refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }
 
 #' @export
 #' @rdname transform
-refine_unescape_html <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_unescape_html <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, validate = TRUE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.unescape('html')",
@@ -483,6 +545,7 @@ refine_unescape_html <- function(column_name, mode = "row-based", on_error = "se
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
+                     validate = validate,
                      ...)
 
 }

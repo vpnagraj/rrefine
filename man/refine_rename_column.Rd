@@ -10,6 +10,7 @@ refine_rename_column(
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
+  validate = TRUE,
   ...
 )
 }
@@ -23,6 +24,8 @@ refine_rename_column(
 \item{project.id}{Unique identifier for project}
 
 \item{verbose}{Logical specifying whether or not query result should be printed; default is \code{FALSE}}
+
+\item{validate}{Logical as to whether or not the operation should validate parameters against existing data in project; default is \code{TRUE}}
 
 \item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
