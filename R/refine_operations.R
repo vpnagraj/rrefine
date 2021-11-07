@@ -154,6 +154,10 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #'
 #' @name transform
 #'
+#' @description
+#'
+#' The text transform functions allow users to pass arbitrary text transformations to a column in an existing OpenRefine project via an API query to `/command/core/apply-operations` and the `core/text-transform` operation. Besides the generic `refine_transform()`, the package includes a series of transform functions that apply commonly used text operations. For more information on these functions see 'Details'.
+#'
 #' @param column_name Name of the column on which text transformation should be performed
 #' @param expression Expression defining the text transformation to be performed
 #' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
@@ -164,12 +168,59 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
+#' @details
+#' The `refine_transform()` function allows the user to pass arbitrary text transformations to a given column in an OpenRefine project. The package includes a set of functions that wrap `refine_transform()` to execute common transformations:
+#'
+#' - `refine_to_lower()`: Coerce text to lowercase
+#' - `refine_to_upper()`: Coerce text to uppercase
+#' - `refine_to_title()`: Coerce text to title case
+#' - `refine_to_null()`: Set values to `NULL`
+#' - `refine_to_empty()`: Set text values to empty string (`""`)
+#' - `refine_to_text()`: Coerce value to string
+#' - `refine_to_number()`: Coerce value to numeric
+#' - `refine_to_date()`: Coerce value to date
+#' - `refine_trim_whitespace()`: Remove leading and trailing whitespaces
+#' - `refine_collapse_whitespace()`: Collapse consecutive whitespaces to single whitespace
+#' - `refine_unescape_html()`: Unescape HTML in string
+#'
 #' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
 #'
 #' @md
 #'
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+#'refine_upload(fp, project.name = "lfm")
+#'
+#'refine_add_column(new_column = "dotw",
+#'                  base_column = "what day whas it",
+#'                  value = "grel:value",
+#'                  project.name = "lfm")
+#'
+#'refine_export("lfm")$dotw
+#'refine_to_lower("dotw", project.name = "lfm")
+#'refine_export("lfm")$dotw
+#'refine_to_upper("dotw", project.name = "lfm")
+#'refine_export("lfm")$dotw
+#'refine_to_title("dotw", project.name = "lfm")
+#'refine_export("lfm")$dotw
+#'refine_to_null("dotw", project.name = "lfm")
+#'refine_export("lfm")$dotw
+#'refine_remove_column("dotw", project.name = "lfm")
+#'
+#'refine_add_column(new_column = "date",
+#'                  base_column = "theDate",
+#'                  value = "grel:value",
+#'                  project.name = "lfm")
+#'
+#'refine_export("lfm")$date
+#'refine_to_date("date", project.name = "lfm")
+#'refine_export("lfm")$date
+#'refine_remove_column("date", project.name = "lfm")
+#'
+#' }
 #'
 refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
@@ -317,3 +368,50 @@ refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-b
 
 }
 
+#' @export
+#' @rdname transform
+refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.trim()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.replace(/\\s+/,' ')",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_unescape_html <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.unescape('html')",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}

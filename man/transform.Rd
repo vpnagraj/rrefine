@@ -11,6 +11,9 @@
 \alias{refine_to_text}
 \alias{refine_to_number}
 \alias{refine_to_date}
+\alias{refine_trim_whitespace}
+\alias{refine_collapse_whitespace}
+\alias{refine_unescape_html}
 \title{Text transformation for OpenRefine project}
 \usage{
 refine_transform(
@@ -112,6 +115,39 @@ refine_to_date(
   verbose = FALSE,
   ...
 )
+
+refine_trim_whitespace(
+  column_name,
+  mode = "row-based",
+  on_error = "set-to-blank",
+  description = "",
+  project.name = NULL,
+  project.id = NULL,
+  verbose = FALSE,
+  ...
+)
+
+refine_collapse_whitespace(
+  column_name,
+  mode = "row-based",
+  on_error = "set-to-blank",
+  description = "",
+  project.name = NULL,
+  project.id = NULL,
+  verbose = FALSE,
+  ...
+)
+
+refine_unescape_html(
+  column_name,
+  mode = "row-based",
+  on_error = "set-to-blank",
+  description = "",
+  project.name = NULL,
+  project.id = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{column_name}{Name of the column on which text transformation should be performed}
@@ -136,5 +172,55 @@ refine_to_date(
 Operates as a side-effect passing operations to the OpenRefine instance. However, if \code{verbose=TRUE} then the function will return an object of the class "response".
 }
 \description{
-Text transformation for OpenRefine project
+The text transform functions allow users to pass arbitrary text transformations to a column in an existing OpenRefine project via an API query to \verb{/command/core/apply-operations} and the \code{core/text-transform} operation. Besides the generic \code{refine_transform()}, the package includes a series of transform functions that apply commonly used text operations. For more information on these functions see 'Details'.
+}
+\details{
+The \code{refine_transform()} function allows the user to pass arbitrary text transformations to a given column in an OpenRefine project. The package includes a set of functions that wrap \code{refine_transform()} to execute common transformations:
+\itemize{
+\item \code{refine_to_lower()}: Coerce text to lowercase
+\item \code{refine_to_upper()}: Coerce text to uppercase
+\item \code{refine_to_title()}: Coerce text to title case
+\item \code{refine_to_null()}: Set values to \code{NULL}
+\item \code{refine_to_empty()}: Set text values to empty string (\code{""})
+\item \code{refine_to_text()}: Coerce value to string
+\item \code{refine_to_number()}: Coerce value to numeric
+\item \code{refine_to_date()}: Coerce value to date
+\item \code{refine_trim_whitespace()}: Remove leading and trailing whitespaces
+\item \code{refine_collapse_whitespace()}: Collapse consecutive whitespaces to single whitespace
+\item \code{refine_unescape_html()}: Unescape HTML in string
+}
+}
+\examples{
+\dontrun{
+fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+refine_upload(fp, project.name = "lfm")
+
+refine_add_column(new_column = "dotw",
+                 base_column = "what day whas it",
+                 value = "grel:value",
+                 project.name = "lfm")
+
+refine_export("lfm")$dotw
+refine_to_lower("dotw", project.name = "lfm")
+refine_export("lfm")$dotw
+refine_to_upper("dotw", project.name = "lfm")
+refine_export("lfm")$dotw
+refine_to_title("dotw", project.name = "lfm")
+refine_export("lfm")$dotw
+refine_to_null("dotw", project.name = "lfm")
+refine_export("lfm")$dotw
+refine_remove_column("dotw", project.name = "lfm")
+
+refine_add_column(new_column = "date",
+                 base_column = "theDate",
+                 value = "grel:value",
+                 project.name = "lfm")
+
+refine_export("lfm")$date
+refine_to_date("date", project.name = "lfm")
+refine_export("lfm")$date
+refine_remove_column("date", project.name = "lfm")
+
+}
+
 }
