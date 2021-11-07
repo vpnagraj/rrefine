@@ -21,7 +21,6 @@ refine_transform(
   expression,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -32,7 +31,6 @@ refine_to_lower(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -43,7 +41,6 @@ refine_to_upper(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -54,7 +51,6 @@ refine_to_title(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -65,7 +61,6 @@ refine_to_null(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -76,7 +71,6 @@ refine_to_empty(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -87,7 +81,6 @@ refine_to_text(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -98,7 +91,6 @@ refine_to_number(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -109,7 +101,6 @@ refine_to_date(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -120,7 +111,6 @@ refine_trim_whitespace(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -131,7 +121,6 @@ refine_collapse_whitespace(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -142,7 +131,6 @@ refine_unescape_html(
   column_name,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = "",
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -157,8 +145,6 @@ refine_unescape_html(
 \item{mode}{Mode of operation; must be one of \code{"row-based"} or \code{"record-based"}; default is \verb{"row-based}}
 
 \item{on_error}{Behavior if there is an error on new column creation; must be one of \code{"set-to-blank"}, \code{"keep-original"}, or \code{"store-error"}; default is \code{"set-to-blank"}}
-
-\item{description}{Text describing the operation performed}
 
 \item{project.name}{Name of project}
 

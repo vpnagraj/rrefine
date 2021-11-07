@@ -27,7 +27,7 @@ refine_operations(
 Operates as a side-effect passing operations to the OpenRefine instance. However, if \code{verbose=TRUE} then the function will return an object of the class "response".
 }
 \description{
-This function allows users to pass arbitrary operations to an OpenRefine project via an API query to \verb{/command/core/apply-operations}. The operations to perform must be formatted as valid \code{JSON} and passed to this function as a \code{list} object. For more on
+This function allows users to pass arbitrary operations to an OpenRefine project via an API query to \verb{/command/core/apply-operations}. The operations to perform must be formatted as valid \code{JSON} and passed to this function as a \code{list} object.
 }
 \examples{
 \dontrun{
@@ -37,7 +37,6 @@ refine_upload(fp, project.name = "lfm")
 ops <-
    list(
        op = "core/text-transform",
-       description = "Force column to upper case",
        engineConfig = list(mode = "row-based", facets = list()),
        columnName = "was i on time for work",
        expression = "value.toUppercase()",

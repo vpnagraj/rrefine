@@ -1,6 +1,6 @@
 #' Apply operations to OpenRefine project
 #'
-#' This function allows users to pass arbitrary operations to an OpenRefine project via an API query to `/command/core/apply-operations`. The operations to perform must be formatted as valid `JSON` and passed to this function as a `list` object. For more on
+#' This function allows users to pass arbitrary operations to an OpenRefine project via an API query to `/command/core/apply-operations`. The operations to perform must be formatted as valid `JSON` and passed to this function as a `list` object.
 #'
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
@@ -21,7 +21,6 @@
 #'ops <-
 #'    list(
 #'        op = "core/text-transform",
-#'        description = "Force column to upper case",
 #'        engineConfig = list(mode = "row-based", facets = list()),
 #'        columnName = "was i on time for work",
 #'        expression = "value.toUppercase()",
@@ -110,7 +109,6 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #' @param value Definition of the value for the new column; can accept a GREL expression
 #' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
 #' @param on_error Behavior if there is an error on new column creation; must be one of `"set-to-blank"`, `"keep-original"`, or `"store-error"`; default is `"set-to-blank"`
-#' @param description Text describing the operation performed
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
@@ -124,17 +122,23 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 #'refine_upload(fp, project.name = "lfm")
 #'
-#'refine_add_column(new_column = "date_type", new_column_index = 0, value = "grel:value.type()", base_column = "theDate", description = "Adding new column based on theDate", project.name = "lfm")
-#'refine_add_column(new_column = "example_value", new_column_index = 0, value = "1", description = "Adding new column with all rows populated with arbitrary value", project.name = "lfm")
+#'refine_add_column(new_column = "date_type",
+#'                  value = "grel:value.type()",
+#'                  base_column = "theDate",
+#'                  project.name = "lfm")
+#'
+#'refine_add_column(new_column = "example_value",
+#'                  new_column_index = 0,
+#'                  value = "1",
+#'                  project.name = "lfm")
 #' }
 #' @export
 #'
-refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, mode = "row-based", on_error = "set-to-blank", description = NULL, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     ops <-
         list(
             op = "core/column-addition",
-            description = description,
             engineConfig = list(mode = mode, facets = list()),
             newColumnName = new_column,
             columnInsertIndex = new_column_index,
@@ -170,7 +174,7 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #'
 #' @examples
 #'
-#' #' \dontrun{
+#' \dontrun{
 #'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 #'refine_upload(fp, project.name = "lfm")
 #'refine_rename("what day whas it", "what_day_was_it", project.name = "lfm")
@@ -204,7 +208,6 @@ refine_rename <- function(original_name, new_name, project.name = NULL, project.
 #' @param expression Expression defining the text transformation to be performed
 #' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
 #' @param on_error Behavior if there is an error on new column creation; must be one of `"set-to-blank"`, `"keep-original"`, or `"store-error"`; default is `"set-to-blank"`
-#' @param description Text describing the operation performed
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project
 #' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
@@ -264,12 +267,11 @@ refine_rename <- function(original_name, new_name, project.name = NULL, project.
 #'
 #' }
 #'
-refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     ops <-
         list(
             op = "core/text-transform",
-            description = description,
             engineConfig = list(mode = mode, facets = list()),
             columnName = column_name,
             expression = expression,
@@ -284,13 +286,12 @@ refine_transform <- function(column_name, expression, mode = "row-based", on_err
 
 #' @export
 #' @rdname transform
-refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toLowercase()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -300,13 +301,12 @@ refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-
 
 #' @export
 #' @rdname transform
-refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toUppercase()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -316,13 +316,12 @@ refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-
 
 #' @export
 #' @rdname transform
-refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toTitlecase()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -332,13 +331,12 @@ refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-
 
 #' @export
 #' @rdname transform
-refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "null",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -348,13 +346,12 @@ refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-b
 
 #' @export
 #' @rdname transform
-refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "\"\"",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -364,13 +361,12 @@ refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-
 
 #' @export
 #' @rdname transform
-refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toString()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -380,13 +376,12 @@ refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-b
 
 #' @export
 #' @rdname transform
-refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toNumber()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -396,13 +391,12 @@ refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to
 
 #' @export
 #' @rdname transform
-refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.toDate()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -412,13 +406,12 @@ refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-b
 
 #' @export
 #' @rdname transform
-refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.trim()",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -428,13 +421,12 @@ refine_trim_whitespace <- function(column_name, mode = "row-based", on_error = "
 
 #' @export
 #' @rdname transform
-refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.replace(/\\s+/,' ')",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,
@@ -444,13 +436,12 @@ refine_collapse_whitespace <- function(column_name, mode = "row-based", on_error
 
 #' @export
 #' @rdname transform
-refine_unescape_html <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_unescape_html <- function(column_name, mode = "row-based", on_error = "set-to-blank", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     refine_transform(column_name = column_name,
                      expression = "value.unescape('html')",
                      mode = mode,
                      on_error = on_error,
-                     description = description,
                      project.name = project.name,
                      project.id = project.id,
                      verbose = verbose,

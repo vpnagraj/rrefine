@@ -11,7 +11,6 @@ refine_add_column(
   value,
   mode = "row-based",
   on_error = "set-to-blank",
-  description = NULL,
   project.name = NULL,
   project.id = NULL,
   verbose = FALSE,
@@ -30,8 +29,6 @@ refine_add_column(
 \item{mode}{Mode of operation; must be one of \code{"row-based"} or \code{"record-based"}; default is \verb{"row-based}}
 
 \item{on_error}{Behavior if there is an error on new column creation; must be one of \code{"set-to-blank"}, \code{"keep-original"}, or \code{"store-error"}; default is \code{"set-to-blank"}}
-
-\item{description}{Text describing the operation performed}
 
 \item{project.name}{Name of project}
 
@@ -52,7 +49,14 @@ This function will add a column to an existing OpenRefine project via an API que
 fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 refine_upload(fp, project.name = "lfm")
 
-refine_add_column(new_column = "date_type", new_column_index = 0, value = "grel:value.type()", base_column = "theDate", description = "Adding new column based on theDate", project.name = "lfm")
-refine_add_column(new_column = "example_value", new_column_index = 0, value = "1", description = "Adding new column with all rows populated with arbitrary value", project.name = "lfm")
+refine_add_column(new_column = "date_type",
+                 value = "grel:value.type()",
+                 base_column = "theDate",
+                 project.name = "lfm")
+
+refine_add_column(new_column = "example_value",
+                 new_column_index = 0,
+                 value = "1",
+                 project.name = "lfm")
 }
 }

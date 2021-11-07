@@ -34,7 +34,7 @@ This function allows users to rename an existing column in an OpenRefine project
 }
 \examples{
 
-#' \dontrun{
+\dontrun{
 fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 refine_upload(fp, project.name = "lfm")
 refine_rename("what day whas it", "what_day_was_it", project.name = "lfm")
