@@ -196,6 +196,47 @@ refine_rename <- function(original_name, new_name, project.name = NULL, project.
                       ...)
 }
 
+#' Move a column in OpenRefine project
+#'
+#' This function allows users to move an existing column in an OpenRefine project via an API query to `/command/core/apply-operations` and the `core/column-move` operation.
+#'
+#' @param column Name of the column to be removed
+#' @param index Index to which the column should be placed in the project; default is `0` to position the new column as the first column in the project
+#' @param project.name Name of project
+#' @param project.id Unique identifier for project
+#' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#'
+#' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
+#'
+#' @md
+#'
+#' @export
+#'
+#' @examples
+#'
+#' \dontrun{
+#'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+#'refine_upload(fp, project.name = "lfm")
+#'refine_move_column("sleephours", index = 0, project.name = "lfm")
+#' }
+#'
+#'
+refine_move_column <- function(column, index = 0, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    ops <-
+        list(
+            op = "core/column-move",
+            columnName = column,
+            index = index)
+
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(ops),
+                      verbose = verbose,
+                      ...)
+}
+
 #' Text transformation for OpenRefine project
 #'
 #' @name transform
