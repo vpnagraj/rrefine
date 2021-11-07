@@ -149,3 +149,171 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
                       operations = list(ops),
                       ...)
 }
+
+#' Text transformation for OpenRefine project
+#'
+#' @name transform
+#'
+#' @param column_name Name of the column on which text transformation should be performed
+#' @param expression Expression defining the text transformation to be performed
+#' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
+#' @param on_error Behavior if there is an error on new column creation; must be one of `"set-to-blank"`, `"keep-original"`, or `"store-error"`; default is `"set-to-blank"`
+#' @param description Text describing the operation performed
+#' @param project.name Name of project
+#' @param project.id Unique identifier for project
+#' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#'
+#' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
+#'
+#' @md
+#'
+#' @export
+#'
+#'
+refine_transform <- function(column_name, expression, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    ops <-
+        list(
+            op = "core/text-transform",
+            description = description,
+            engineConfig = list(mode = mode, facets = list()),
+            columnName = column_name,
+            expression = expression,
+            onError = on_error)
+
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(ops),
+                      verbose = verbose,
+                      ...)
+}
+
+#' @export
+#' @rdname transform
+refine_to_lower <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toLowercase()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_upper <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toUppercase()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_title <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toTitlecase()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_null <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "null",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_empty <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "\"\"",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_text <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toString()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_number <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toNumber()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
+#' @export
+#' @rdname transform
+refine_to_date <- function(column_name, mode = "row-based", on_error = "set-to-blank", description = "", project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    refine_transform(column_name = column_name,
+                     expression = "value.toDate()",
+                     mode = mode,
+                     on_error = on_error,
+                     description = description,
+                     project.name = project.name,
+                     project.id = project.id,
+                     verbose = verbose,
+                     ...)
+
+}
+
