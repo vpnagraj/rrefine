@@ -9,6 +9,7 @@ refine_add_column(
   new_column_index = 0,
   base_column = NULL,
   value,
+  mode = "row-based",
   on_error = "set-to-blank",
   description = NULL,
   project.name = NULL,
@@ -25,6 +26,8 @@ refine_add_column(
 \item{base_column}{Name of the column on which the value will be based; default is \code{NULL}, which means that the value will not be based off of a value in an existing column}
 
 \item{value}{Definition of the value for the new column; can accept a GREL expression}
+
+\item{mode}{Mode of operation; must be one of \code{"row-based"} or \code{"record-based"}; default is \verb{"row-based}}
 
 \item{on_error}{Behavior if there is an error on new column creation; must be one of \code{"set-to-blank"}, \code{"keep-original"}, or \code{"store-error"}; default is \code{"set-to-blank"}}
 

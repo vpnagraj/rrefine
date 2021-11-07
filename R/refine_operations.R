@@ -108,6 +108,7 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #' @param new_column_index Index at which the new column should be placed in the project; default is `0` to position the new column as the first column in the project
 #' @param base_column Name of the column on which the value will be based; default is `NULL`, which means that the value will not be based off of a value in an existing column
 #' @param value Definition of the value for the new column; can accept a GREL expression
+#' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
 #' @param on_error Behavior if there is an error on new column creation; must be one of `"set-to-blank"`, `"keep-original"`, or `"store-error"`; default is `"set-to-blank"`
 #' @param description Text describing the operation performed
 #' @param project.name Name of project
@@ -128,13 +129,13 @@ refine_remove_column <- function(column, project.name = NULL, project.id = NULL,
 #' }
 #' @export
 #'
-refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, on_error = "set-to-blank", description = NULL, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_add_column <- function(new_column, new_column_index = 0, base_column = NULL, value, mode = "row-based", on_error = "set-to-blank", description = NULL, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     ops <-
         list(
             op = "core/column-addition",
             description = description,
-            engineConfig = list(mode = "row-based", facets = list()),
+            engineConfig = list(mode = mode, facets = list()),
             newColumnName = new_column,
             columnInsertIndex = new_column_index,
             expression = value,
