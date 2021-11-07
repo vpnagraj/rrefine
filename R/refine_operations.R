@@ -165,7 +165,6 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #'
 #' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
-#'
 #' @md
 #'
 #' @export

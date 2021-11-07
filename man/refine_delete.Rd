@@ -30,5 +30,5 @@ refine_delete("lfm", force = TRUE)
 
 }
 \references{
-\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#delete-project}
+\url{https://docs.openrefine.org/technical-reference/openrefine-api#delete-project}
 }

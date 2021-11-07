@@ -7,7 +7,7 @@
 #' @param force Boolean indicating whether or not the prompt to confirm deletion should be skipped; default is `FALSE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return Operates as a side-effect to delete the project. Issues a message that the project has been deleted.
-#' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#delete-project}
+#' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#delete-project}
 #' @export
 #' @md
 #' @examples
