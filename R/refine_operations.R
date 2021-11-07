@@ -150,6 +150,47 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
                       ...)
 }
 
+#' Rename a column in OpenRefine project
+#'
+#' This function allows users to rename an existing column in an OpenRefine project via an API query to `/command/core/apply-operations` and the `core/column-rename` operation.
+#'
+#' @param original_name Original name for the column
+#' @param new_name New name for the column
+#' @param project.name Name of project
+#' @param project.id Unique identifier for project
+#' @param verbose Logical specifying whether or not query result should be printed; default is `FALSE`
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#'
+#' @return Operates as a side-effect passing operations to the OpenRefine instance. However, if `verbose=TRUE` then the function will return an object of the class "response".
+#'
+#' @md
+#'
+#' @export
+#'
+#' @examples
+#'
+#' #' \dontrun{
+#'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
+#'refine_upload(fp, project.name = "lfm")
+#'refine_rename("what day whas it", "what_day_was_it", project.name = "lfm")
+#' }
+#'
+#'
+refine_rename <- function(original_name, new_name, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+
+    ops <-
+        list(
+            op = "core/column-rename",
+            newColumnName = new_name,
+            oldColumnName = original_name)
+
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(ops),
+                      verbose = verbose,
+                      ...)
+}
+
 #' Text transformation for OpenRefine project
 #'
 #' @name transform
