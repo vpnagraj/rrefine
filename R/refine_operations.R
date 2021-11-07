@@ -88,15 +88,12 @@ refine_operations <- function(project.name = NULL, project.id = NULL, verbose = 
 #'
 refine_remove_column <- function(column, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
-    res <-
-        refine_operations(project.name = project.name,
-                          project.id = project.id,
-                          operations = list(list(op = "core/column-removal",
-                                                 columnName = column)),
+    refine_operations(project.name = project.name,
+                      project.id = project.id,
+                      operations = list(list(op = "core/column-removal",
+                                             columnName = column)),
+                      verbose = verbose,
                       ...)
-    if(verbose) {
-        return(res)
-    }
 }
 
 #' Add column to OpenRefine project
@@ -152,6 +149,7 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
     refine_operations(project.name = project.name,
                       project.id = project.id,
                       operations = list(ops),
+                      verbose = verbose,
                       ...)
 }
 
@@ -177,11 +175,11 @@ refine_add_column <- function(new_column, new_column_index = 0, base_column = NU
 #' \dontrun{
 #'fp <- system.file("extdata", "lateformeeting.csv", package = "rrefine")
 #'refine_upload(fp, project.name = "lfm")
-#'refine_rename("what day whas it", "what_day_was_it", project.name = "lfm")
+#'refine_rename_column("what day whas it", "what_day_was_it", project.name = "lfm")
 #' }
 #'
 #'
-refine_rename <- function(original_name, new_name, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
+refine_rename_column <- function(original_name, new_name, project.name = NULL, project.id = NULL, verbose = FALSE, ...) {
 
     ops <-
         list(
