@@ -37,7 +37,7 @@ The package includes the following functionality to interface with **OpenRefine*
 - `refine_add_column()`: Add a column to a project
 - `refine_rename_column()`: Rename an existing column in a project
 - `refine_move_column()`: Move a column to a new index
-- `refine_transform()`: Apply abitrary text transformations
+- `refine_transform()`: Apply arbitrary text transformations
 - `refine_to_lower()`: Coerce text to lowercase
 - `refine_to_upper()`: Coerce text to uppercase
 - `refine_to_title()`: Coerce text to title case
