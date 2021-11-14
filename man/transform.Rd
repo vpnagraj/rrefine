@@ -154,7 +154,7 @@ refine_unescape_html(
 
 \item{expression}{Expression defining the text transformation to be performed}
 
-\item{mode}{Mode of operation; must be one of \code{"row-based"} or \code{"record-based"}; default is \verb{"row-based}}
+\item{mode}{Mode of operation; must be one of \code{"row-based"} or \code{"record-based"}; default is \code{"row-based"}}
 
 \item{on_error}{Behavior if there is an error on new column creation; must be one of \code{"set-to-blank"}, \code{"keep-original"}, or \code{"store-error"}; default is \code{"set-to-blank"}}
 

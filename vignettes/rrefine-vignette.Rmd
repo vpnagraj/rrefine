@@ -19,11 +19,20 @@ library(rrefine)
 
 ## Installation
 
-The latest version of **rrefine** is available on [GitHub](https://github.com/vpnagraj/rrefine) and can be installed via **devtools** by using the following:
+**rrefine** is available on CRAN:
+
+```{r, echo=TRUE, eval = FALSE}
+install.packages("rrefine")
+```
+
+The latest version of the package is also available on [GitHub](https://github.com/vpnagraj/rrefine) and can be installed via **devtools** by using the following:
 
 ```{r, echo=TRUE, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("vpnagraj/rrefine")
+```
+
+```{r, echo=TRUE, eval = FALSE}
 library(rrefine)
 ```
 
@@ -37,7 +46,7 @@ knitr::kable(lateformeeting)
 
 ## `refine_upload()`
 
-While the data cleaning could be performed using R, the operations here describe a typical scenario for **OpenRefine** users. The first step to creating a new project is to make sure **OpenRefine** is installed and running. By default, the application will run locally at `http://127.0.0.1:3333/`[^3]. All of the functions in **rrefine** will assume the default local host name and port, however these can both be overridden[^4]. Additionally, as of `v1.1.0` the package will internally connect to the **OpenRefine** instance using a CSRF token in API requests[^5]. The `refine_upload()` function allows you to pass the contents of a delimited text file (csv or tsv) along with a project name (optional) and an argument to automatically open the browser in which **OpenRefine** is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
+While the data cleaning could be performed using R, the operations here describe a typical scenario for **OpenRefine** users. The first step to creating a new project is to make sure **OpenRefine** is installed and running[^3]. By default, the application will run locally at `http://127.0.0.1:3333/`. All of the functions in **rrefine** will assume the default local host name and port, however these can both be overridden[^4]. Additionally, as of `v1.1.0` the package will internally connect to the **OpenRefine** instance using a CSRF token in API requests[^5]. The `refine_upload()` function allows you to pass the contents of a delimited text file (csv or tsv) along with a project name (optional) and an argument to automatically open the browser in which **OpenRefine** is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
 write.csv(lateformeeting, file = "lateformeeting.csv", row.names = FALSE)
@@ -48,7 +57,7 @@ With the project uploaded, you can perform any of the desired clean-up procedure
 
 ## `refine_operations()`
 
-Whether the data in **OpenRefine** has been uploaded via `refine_upload()` or another method, users can programmatically apply operations to projects using `refine_operations()`. This function will pass an arbitrary list of data cleaning operations to the specified project. Operations must be defined in valid JSON format[^6]. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes series of wrapper functions to perform common data cleaning procedures:
+Whether the data in **OpenRefine** has been uploaded via `refine_upload()` or another method, users can programmatically apply operations to projects using `refine_operations()`. This function will pass an arbitrary list of data cleaning operations to the specified project. Operations must be defined in valid JSON format[^6]. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes a series of wrapper functions to perform common data cleaning procedures:
 
 - `refine_remove_column()`: Remove a column from a project
 - `refine_add_column()`: Add a column to a project

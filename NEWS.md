@@ -4,7 +4,7 @@ This major release introduces a significant new feature that allows users to per
 
 ## New Features
 
-The new functionality passes JSON-specified operations to the running instance via the `/command/core/apply-operations` endpoint. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes series of wrapper functions to perform common data cleaning procedures:
+The new functionality passes JSON-specified operations to the running instance via the `/command/core/apply-operations` endpoint. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes a series of wrapper functions to perform common data cleaning procedures:
 
 - `refine_remove_column()`: Remove a column from a project
 - `refine_add_column()`: Add a column to a project

@@ -287,7 +287,7 @@ refine_move_column <- function(column, index = 0, project.name = NULL, project.i
 #'
 #' @param column_name Name of the column on which text transformation should be performed
 #' @param expression Expression defining the text transformation to be performed
-#' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based`
+#' @param mode Mode of operation; must be one of `"row-based"` or `"record-based"`; default is `"row-based"`
 #' @param on_error Behavior if there is an error on new column creation; must be one of `"set-to-blank"`, `"keep-original"`, or `"store-error"`; default is `"set-to-blank"`
 #' @param project.name Name of project
 #' @param project.id Unique identifier for project

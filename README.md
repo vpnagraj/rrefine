@@ -6,7 +6,7 @@
 
 ## Introduction
 
-[**OpenRefine**](https://openrefine.org/) (formerly **Google Refine**) is a popular, open source data cleaning software. **rrefine** enables users to programmatically trigger data transfer between R and **OpenRefine**. Using the functions available in this package, you can import, export or delete a project in **OpenRefine** directly from R. There are [several client libraries for automating **OpenRefine** tasks via Python, nodeJS and Ruby](https://docs.openrefine.org/technical-reference/openrefine-api#third-party-software-libraries). **rrefine** extends this functionality to R users.
+[**OpenRefine**](https://openrefine.org/) (formerly **Google Refine**) is a popular, open source data cleaning software. **rrefine** enables users to programmatically trigger data transfer between R and **OpenRefine**. Using the functions available in this package, you can import, export, apply data cleaning operations, or delete a project in **OpenRefine** directly from R. There are [several client libraries for automating **OpenRefine** tasks via Python, nodeJS and Ruby](https://docs.openrefine.org/technical-reference/openrefine-api#third-party-software-libraries). **rrefine** extends this functionality to R users.
 
 ## Installation
 
@@ -28,7 +28,7 @@ library(rrefine)
 
 The package includes the following functionality to interface with **OpenRefine** projects:
 
-- `refine_upload()`: Upload data to a proejcet
+- `refine_upload()`: Upload data to a project
 - `refine_export()`: Export data from a project
 - `refine_delete()`: Delete a project
 - `refine_metadata()`: Retrieve metadata from all projects
