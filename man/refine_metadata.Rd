@@ -22,5 +22,5 @@ refine_metadata()
 
 }
 \references{
-\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
+\url{https://docs.openrefine.org/technical-reference/openrefine-api#get-all-projects-metadata}
 }

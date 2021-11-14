@@ -11,7 +11,7 @@
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return A `tibble` that has been parsed and read into memory using \code{\link[readr]{read_csv}}. If `col.names=TRUE` then the `tibble` will have column headers.
 #'
-#' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#export-rows}
+#' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#export-rows}
 #' @export
 #' @md
 #' @examples

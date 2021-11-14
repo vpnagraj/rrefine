@@ -7,7 +7,7 @@
 #' @param open.browser Boolean for whether or not the browser should open on successful upload; default is `FALSE`
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @return Operates as a side-effect, either opening a browser and pointing to the OpenRefine instance (if `open.browser=TRUE`) or issuing a message.
-#' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#create-project}
+#' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#create-project}
 #' @export
 #' @md
 #' @examples

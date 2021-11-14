@@ -15,15 +15,24 @@ library(rrefine)
 
 ## Introduction
 
-*OpenRefine* (formerly *Google Refine*) is a popular, open source data cleaning software[^1]. **rrefine** enables users to programmatically trigger data transfer between R and *OpenRefine*. Using the functions avaialable in this package, you can import, export or delete a project in *OpenRefine* directly from an R script. There are several client libraries for automating *OpenRefine* tasks via Python, nodeJS and Ruby[^2]. **rrefine** extends this functionality to R users.
+**OpenRefine** (formerly **Google Refine**) is a popular, open source data cleaning software[^1]. **rrefine** enables users to programmatically trigger data transfer between R and **OpenRefine**. Using the functions available in this package, you can import, export, apply data cleaning operations, or delete a project in **OpenRefine** directly from R. There are several client libraries for automating **OpenRefine** tasks via Python, nodeJS and Ruby[^2]. **rrefine** extends this functionality to R users.
 
 ## Installation
 
-The latest version of **rrefine** is availabe on [Github](https://github.com/vpnagraj/rrefine) and can be installed via **devtools** by using the following:
+**rrefine** is available on CRAN:
+
+```{r, echo=TRUE, eval = FALSE}
+install.packages("rrefine")
+```
+
+The latest version of the package is also available on [GitHub](https://github.com/vpnagraj/rrefine) and can be installed via **devtools** by using the following:
 
 ```{r, echo=TRUE, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("vpnagraj/rrefine")
+```
+
+```{r, echo=TRUE, eval = FALSE}
 library(rrefine)
 ```
 
@@ -37,18 +46,58 @@ knitr::kable(lateformeeting)
 
 ## `refine_upload()`
 
-While all of the data cleaning here could be performed using R, this is a typical scenario for *OpenRefine* users. The first step to creating a new project is to make sure *OpenRefine* is installed and running locally at `http://127.0.0.1:3333/`[^3]. The `refine_upload()` function allows you to pass the contents of a comma separted value (csv) along with a project name (optional) and an argument to automatically open the browser in which *OpenRefine* is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
+While the data cleaning could be performed using R, the operations here describe a typical scenario for **OpenRefine** users. The first step to creating a new project is to make sure **OpenRefine** is installed and running[^3]. By default, the application will run locally at `http://127.0.0.1:3333/`. All of the functions in **rrefine** will assume the default local host name and port, however these can both be overridden[^4]. Additionally, as of `v1.1.0` the package will internally connect to the **OpenRefine** instance using a CSRF token in API requests[^5]. The `refine_upload()` function allows you to pass the contents of a delimited text file (csv or tsv) along with a project name (optional) and an argument to automatically open the browser in which **OpenRefine** is running. The example below demonstrates this workflow using the `lateformeeting` sample data:
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
 write.csv(lateformeeting, file = "lateformeeting.csv", row.names = FALSE)
 refine_upload(file = "lateformeeting.csv", project.name = "lfm_cleanup", open.browser = TRUE)
 ```
 
-With the project uploaded, you can perform any of the desired clean-up procedures in *OpenRefine*.
+With the project uploaded, you can perform any of the desired clean-up procedures in **OpenRefine**.
+
+## `refine_operations()`
+
+Whether the data in **OpenRefine** has been uploaded via `refine_upload()` or another method, users can programmatically apply operations to projects using `refine_operations()`. This function will pass an arbitrary list of data cleaning operations to the specified project. Operations must be defined in valid JSON format[^6]. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes a series of wrapper functions to perform common data cleaning procedures:
+
+- `refine_remove_column()`: Remove a column from a project
+- `refine_add_column()`: Add a column to a project
+- `refine_rename_column()`: Rename an existing column in a project
+- `refine_move_column()`: Move a column to a new index
+- `refine_transform()`: Apply arbitrary text transformations
+- `refine_to_lower()`: Coerce text to lowercase
+- `refine_to_upper()`: Coerce text to uppercase
+- `refine_to_title()`: Coerce text to title case
+- `refine_to_null()`: Set values to `NULL`
+- `refine_to_empty()`: Set text values to empty string (`""`)
+- `refine_to_text()`: Coerce value to string
+- `refine_to_number()`: Coerce value to numeric
+- `refine_to_date()`: Coerce value to date
+- `refine_trim_whitespace()`: Remove leading and trailing whitespaces
+- `refine_collapse_whitespace()`: Collapse consecutive whitespaces to single whitespace
+- `refine_unescape_html()`: Unescape HTML in string
+
+The example below demonstrates several operations using the `lateformeeting` sample data:
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
+refine_add_column(new_column = "dotw_allcaps", 
+                  base_column = "what.day.whas.it", 
+                  value = "grel:value",
+                  project.name = "lfm_cleanup")
+refine_to_upper(column_name = "dotw_allcaps", project.name = "lfm_cleanup")
+refine_export(project.name = "lfm_cleanup")$dotw_allcaps
+```
+
+```{r echo=FALSE}
+toupper(lfm_clean$dotw)
+```
+
+```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
+refine_remove_column(column = "dotw_allcaps", project.name = "lfm_cleanup")
+```
 
 ## `refine_export()`
 
-Once you've cleaned up the data in *OpenRefine* you can pull it back into R for plotting, modeling, etc. by using `refine_export()`. This function will accept *either* the project name or the numerical unique identifier. It is only necessary to use *both* if there are multiple projects with the same name in your *OpenRefine* application. Note that here, the data is exported directly into R as a data frame, and you can assign it to a new object.
+Once you've cleaned up the data in **OpenRefine** you can pull it back into R for plotting, modeling, etc. by using `refine_export()`. This function will accept *either* the project name or the numerical unique identifier. It is only necessary to use *both* if there are multiple projects with the same name in your **OpenRefine** application. Note that the data is exported directly into R as a data frame and you can assign it to a new object.
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
 lfm_clean <- refine_export(project.name = "lfm_cleanup")
@@ -63,7 +112,7 @@ From there the clean data is available for analyses that couldn't have been perf
 
 ## `refine_delete()`
 
-To clean up your *OpenRefine* workspace you can delete projects using `refine_delete()`. Just like `refine_export()` it's possible to pass *either* a project name or unique identifier to this function. And it is only necessary to use *both* if there are multiple projects with the same name.
+To clean up your **OpenRefine** workspace you can delete projects using `refine_delete()`. Just like `refine_export()` it's possible to pass *either* a project name or unique identifier to this function. And it is only necessary to use *both* if there are multiple projects with the same name.
 
 ```{r, eval = FALSE, echo = TRUE, warning = FALSE, message=FALSE}
 refine_delete(project.name = "lfm_cleanup")
@@ -72,5 +121,8 @@ refine_delete(project.name = "lfm_cleanup")
 ## References
 
 [^1]: <https://openrefine.org/>
-[^2]: <https://github.com/OpenRefine/OpenRefine/wiki/Documentation-For-Developers#known-client-libraries-for-refine>
+[^2]: <https://docs.openrefine.org/technical-reference/openrefine-api#third-party-software-libraries>
 [^3]: <https://openrefine.org/download.html>
+[^4]: For documentation on how to specify a different host or port number see `?refine_path()`.
+[^5]: <https://github.com/OpenRefine/OpenRefine/wiki/Changes-for-3.3#csrf-protection-changes>
+[^6]: <https://docs.openrefine.org/technical-reference/openrefine-api#apply-operations>

@@ -44,5 +44,5 @@ refine_export("lfm", format = "csv")
 
 }
 \references{
-\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#export-rows}
+\url{https://docs.openrefine.org/technical-reference/openrefine-api#export-rows}
 }

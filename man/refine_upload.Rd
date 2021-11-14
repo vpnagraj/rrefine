@@ -31,5 +31,5 @@ refine_upload(file = "mtcars.tsv", project.name = "mtcars")
 
 }
 \references{
-\url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#create-project}
+\url{https://docs.openrefine.org/technical-reference/openrefine-api#create-project}
 }

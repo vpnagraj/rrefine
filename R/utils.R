@@ -18,7 +18,7 @@ refine_path <- function(host = "http://127.0.0.1", port ="3333") {
 #' This function is included internally to help retrieve metadata from the running OpenRefine instance. The query uses the OpenRefine API `/command/core/get-all-project-metadata` endpoint.
 #'
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
-#' @references \url{https://github.com/OpenRefine/OpenRefine/wiki/OpenRefine-API#get-all-projects-metadata}
+#' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#get-all-projects-metadata}
 #' @return Parsed `list` object with all project metadata including identifiers, names, dates of creation and modification, tags and more.
 #' @md
 #' @export

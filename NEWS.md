@@ -1,3 +1,34 @@
+# rrefine 2.0.0
+
+This major release introduces a significant new feature that allows users to perform data cleaning operations in OpenRefine through an API query. 
+
+## New Features
+
+The new functionality passes JSON-specified operations to the running instance via the `/command/core/apply-operations` endpoint. In addition to the generic `refine_operations()` that can flexibly accept any valid JSON operation, the **rrefine** package includes a series of wrapper functions to perform common data cleaning procedures:
+
+- `refine_remove_column()`: Remove a column from a project
+- `refine_add_column()`: Add a column to a project
+- `refine_rename_column()`: Rename an existing column in a project
+- `refine_move_column()`: Move a column to a new index
+- `refine_transform()`: Apply arbitrary text transformations
+- `refine_to_lower()`: Coerce text to lowercase
+- `refine_to_upper()`: Coerce text to uppercase
+- `refine_to_title()`: Coerce text to title case
+- `refine_to_null()`: Set values to `NULL`
+- `refine_to_empty()`: Set text values to empty string (`""`)
+- `refine_to_text()`: Coerce value to string
+- `refine_to_number()`: Coerce value to numeric
+- `refine_to_date()`: Coerce value to date
+- `refine_trim_whitespace()`: Remove leading and trailing whitespaces
+- `refine_collapse_whitespace()`: Collapse consecutive whitespaces to single whitespace
+- `refine_unescape_html()`: Unescape HTML in string
+
+In addition to the data cleaning operations functionality, the documentation has been updated throughout to point to the current OpenRefine user manual (https://docs.openrefine.org/).
+
+## Tests
+
+Tested with OpenRefine 3.4.1 and 3.5.0 running on Linux and Mac OSX.
+
 # rrefine 1.1.2
 
 Minor release to incorporate new features. 
