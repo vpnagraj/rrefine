@@ -41,7 +41,7 @@ refine_metadata <- function(...) {
 #'
 #' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
 #' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#get-all-projects-metadata}
-#' @return A `data.frame` with observations containting high-level summary metadata for all projects in the OpenRefine instance. Columns include: project id ("id"), project name ("name"),
+#' @return A `data.frame` with observations containting high-level summary metadata for all projects in the OpenRefine instance. Columns include: project id ("id"), project name ("name"), project description ("description"), count of number of project rows ("rowCount"), date created ("created"), and date modified ("modified").
 #' @md
 #' @export
 #' @examples

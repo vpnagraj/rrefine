@@ -1,3 +1,15 @@
+# rrefine 2.1.0
+
+This release introduces a new function to summarize project metadata.
+
+## New Features
+
+The new `refine_project_summary()` function queries the running OpenRefine instance and returns high-level summary information about each project. The summary information is pulled from the OpenRefine metadata API and includes project identifier, name, date modified, date created, description, and number of rows in the project.
+
+## Tests
+
+Tested with OpenRefine 3.4.1 and 3.5.0 running on Linux and Mac OSX.
+
 # rrefine 2.0.0
 
 This major release introduces a significant new feature that allows users to perform data cleaning operations in OpenRefine through an API query. 

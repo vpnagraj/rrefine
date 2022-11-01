@@ -10,7 +10,7 @@ refine_project_summary(...)
 \item{...}{Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify \code{host} and \code{port} arguments if the OpenRefine instance is running at a location other than \verb{http://127.0.0.1:3333}}
 }
 \value{
-A \code{data.frame} with observations containting high-level summary metadata for all projects in the OpenRefine instance. Columns include: project id ("id"), project name ("name"),
+A \code{data.frame} with observations containting high-level summary metadata for all projects in the OpenRefine instance. Columns include: project id ("id"), project name ("name"), project description ("description"), count of number of project rows ("rowCount"), date created ("created"), and date modified ("modified").
 }
 \description{
 This function retrieves high-level project summary data (such as id, name, date created, date modified, description, and row count) from all projects in the OpenRefine instance. Internally this function uses \code{\link{refine_metadata}} to pull information from project metadata.
