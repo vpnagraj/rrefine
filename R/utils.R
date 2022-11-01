@@ -35,6 +35,67 @@ refine_metadata <- function(...) {
 
 }
 
+#' Get project summary data
+#'
+#' This function retrieves high-level project summary data (such as id, name, date created, date modified, description, and row count) from all projects in the OpenRefine instance. Internally this function uses \code{\link{refine_metadata}} to pull information from project metadata.
+#'
+#' @param ... Additional parameters to be inherited by \code{\link{refine_path}}; allows users to specify `host` and `port` arguments if the OpenRefine instance is running at a location other than `http://127.0.0.1:3333`
+#' @references \url{https://docs.openrefine.org/technical-reference/openrefine-api#get-all-projects-metadata}
+#' @return A `data.frame` with observations containting high-level summary metadata for all projects in the OpenRefine instance. Columns include: project id ("id"), project name ("name"),
+#' @md
+#' @export
+#' @examples
+#' \dontrun{
+#' refine_project_summary()
+#' }
+#'
+
+refine_project_summary <- function(...) {
+
+    ## pull metadata for all projects
+    tmp_meta <- refine_metadata(...)
+
+    ## TODO: add check if there are no projects
+    if(length(tmp_meta$projects) == 0) {
+        stop("There are no projects in the OpenRefine instance.")
+    }
+    ## initialize vectors of summary data to parse
+    tmp_proj_ids <- vector()
+    tmp_names <- vector()
+    tmp_descriptions <- vector()
+    tmp_rowcounts <- vector()
+    tmp_createds <- vector()
+    tmp_modifieds <- vector()
+
+    ## loop over all projects
+    ## pull relevant items and add them to each vector iteratively
+    for(i in 1:length(tmp_meta$projects)) {
+
+        tmp_proj_ids[i] <- names(tmp_meta$projects)[i]
+        tmp_names[i] <- tmp_meta$projects[[i]]$name
+        tmp_descriptions[i] <- tmp_meta$projects[[i]]$description
+        tmp_rowcounts[i] <- tmp_meta$projects[[i]]$rowCount
+        tmp_createds[i] <- tmp_meta$projects[[i]]$created
+        tmp_modifieds[i] <- tmp_meta$projects[[i]]$modified
+
+    }
+
+    ## create a dataframe from the project summary metadata
+    res <-
+        data.frame(
+            id = tmp_proj_ids,
+            name = tmp_names,
+            description = tmp_descriptions,
+            rowCount = tmp_rowcounts,
+            created = tmp_createds,
+            modified = tmp_modifieds,
+            stringsAsFactors = FALSE
+        )
+
+    return(res)
+
+}
+
 #' Helper function to get OpenRefine project.id by project.name
 #'
 #' For functions that allow either a project name or id to be passed, this function is used internally to resolve the project id from name if necessary. It also validates that values passed to the `project.id`` argument match an existing project id in the running OpenRefine instance.
