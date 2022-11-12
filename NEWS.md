@@ -8,7 +8,7 @@ The new `refine_project_summary()` function queries the running OpenRefine insta
 
 ## Tests
 
-Tested with OpenRefine 3.4.1 and 3.5.0 running on Linux and Mac OSX.
+Tested with OpenRefine 3.4.1, 3.5.0, and 3.6.2 running on Linux and Mac OSX.
 
 # rrefine 2.0.0
 
