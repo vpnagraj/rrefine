@@ -32,6 +32,7 @@ The package includes the following functionality to interface with **OpenRefine*
 - `refine_export()`: Export data from a project
 - `refine_delete()`: Delete a project
 - `refine_metadata()`: Retrieve metadata from all projects
+- `refine_project_summary()`: Get project summary data
 - `refine_operations()`: Apply arbitrary operations to a project
 - `refine_remove_column()`: Remove a column from a project
 - `refine_add_column()`: Add a column to a project
